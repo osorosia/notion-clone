@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  backend:
+  back:
     build: ./docker/backend
     volumes:
       - ./backend:/app
@@ -10,7 +10,7 @@ services:
     ports:
       - 3000:3000
 
-  frontend:
+  front:
     build: ./docker/frontend
     volumes:
       - ./frontend:/app
@@ -19,6 +19,14 @@ services:
 
   db:
     build: ./docker/db
+    restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: test_db
+    ports:
+      - 27017:27017
+    volumes:
+      - ./docker/db/db:/data/db
+      - ./docker/db/configdb:/data/configdb
+    
