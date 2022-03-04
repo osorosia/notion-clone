@@ -7,6 +7,7 @@
 ## db (MongoDB)
 ```
 mongo admin -u root -p
+> root
 ```
 
 ## gui (Mongo Express)
