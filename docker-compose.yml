@@ -26,7 +26,4 @@ services:
       MONGO_INITDB_DATABASE: test_db
     ports:
       - 27017:27017
-    volumes:
-      - ./docker/db/db:/data/db
-      - ./docker/db/configdb:/data/configdb
     
