@@ -3,6 +3,8 @@ version: '3'
 services:
   back:
     build: ./docker/backend
+    depends_on:
+      - db
     volumes:
       - ./backend:/app
     working_dir: /app
