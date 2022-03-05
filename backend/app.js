@@ -3,8 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
 
@@ -20,7 +20,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+// MongoDB
+// var MongoClient = require('mongodb').MongoClient;
+// MongoClient.connect('mongodb://db:27017/test_db', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+// mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://root:root@db:27017/', {
+	useUnifiedTopology : true,
+	useNewUrlParser : true,
+});
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'DB connection error:'));
+db.once('open', () => console.log('DB connection successful'));
+
+// router
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 

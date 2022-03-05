@@ -1,3 +1,4 @@
+const { application } = require('express');
 var express = require('express');
 var router = express.Router();
 
@@ -9,7 +10,29 @@ router.get('/', function(req, res, next) {
 router.get('/hello', function(req, res, next) {
   var param = {'result': 'Hello'};
   res.header('Content-Type', 'application/json; charset=utf-8');
-  res.send(param);
+  res.json(param);
+});
+
+const Note = require('../models/note');
+
+router.get('/note', function(req, res, next) {
+  Note.find({}, (err, note) => {
+    console.log(note);
+    res.json(note);
+  });
+});
+
+router.post('/note/new', function(req, res, next) {
+  const note = new Note({
+    title: 'ahoho',
+    body: 'testes',
+  });
+  console.log(note);
+  note.save((err) => {
+    if (err) console.log('ng', err);
+    else console.log('ok');
+  });
+  
 });
 
 module.exports = router;
