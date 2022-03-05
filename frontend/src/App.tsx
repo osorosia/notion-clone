@@ -1,11 +1,19 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Button from '@material-ui/core/Button';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <Sidebar />
+      <Header />
+      <Button>
+        Hello
+      </Button>
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
@@ -18,7 +26,7 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
     </div>
   );
 }
