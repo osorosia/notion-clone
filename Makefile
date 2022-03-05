@@ -7,7 +7,8 @@ all:
 back: init
 	docker-compose exec back npm run dev
 
-# front:
+front: init
+	docker-compose exec front npm start
 
 db: init
 	docker-compose exec db mongo admin -u root -p
