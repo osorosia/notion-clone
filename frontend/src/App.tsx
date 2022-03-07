@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
-// import axios from './axios';
 import axios from './axios';
+import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 type Note = {
   _id: string;
@@ -49,12 +50,16 @@ function App() {
 
         {/* ノート一覧 */}
         <ul>
-          <li>使ってみる</li>
-          <li>クイックメモ</li>
-          <li>タスク管理</li>
           {notes?.map((note) => (
-            <li key={note._id}>{note.title}</li>
+            <li key={note._id}>
+              <StickyNote2OutlinedIcon />
+              {note.title}
+            </li>
           ))}
+          <li>
+            <AddOutlinedIcon />
+            ページを追加する
+          </li>
         </ul>
 
         {/* メニュー下部 */}
