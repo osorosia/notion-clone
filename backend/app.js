@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 // MongoDB
-mongoose.connect('mongodb://root:root@db:27017/', {
+mongoose.connect('mongodb://root:root@localhost:27017/', {
 	useUnifiedTopology : true,
 	useNewUrlParser : true,
 });
