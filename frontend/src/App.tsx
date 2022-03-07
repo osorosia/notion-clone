@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
-import axios from './axios';
 import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
