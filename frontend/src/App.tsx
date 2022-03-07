@@ -1,32 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Button from '@material-ui/core/Button';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
+// import './App.css';
+import './App.scss';
+import { Note } from './Note';
 
 function App() {
   return (
     <div className="App">
-      <Sidebar />
-      <Header />
-      <Button>
-        Hello
-      </Button>
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
+      {/* Sidebar------------------------------------------ */}
+      <div className="side">
+        <ul>
+          <li>aaa</li>
+          <li>bbbb</li>
+          <li>ccccc</li>
+        </ul>
+        <ul>
+          <li>aaa</li>
+          <li>bbbb</li>
+          <li>ccccc</li>
+        </ul>
+      </div>
+
+      
+      {/* Header------------------------------------------- */}
+
+      
+      {/* Main--------------------------------------------- */}
+      <div className="content">
+        <ul>
+          <li>aaa</li>
+          <li>bbbb</li>
+          <li>ccccc</li>
+        </ul>
+      </div>
     </div>
   );
 }

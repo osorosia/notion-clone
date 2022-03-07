@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import { ListItemButton } from '@mui/material';
 import { ListItemIcon, ListItemText } from '@material-ui/core';
@@ -28,6 +28,7 @@ const First = () => {
 }
 
 const Second = () => {
+  // useEffect
   return (
     <React.Fragment>
       <p>hello</p>

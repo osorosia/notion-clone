@@ -13,6 +13,9 @@ front: init
 db: init
 	docker-compose exec db mongo admin -u root -p
 
+down:
+	docker-compose down
+
 ###############################################################
 init:
 	docker-compose up -d
