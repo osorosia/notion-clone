@@ -1,8 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.scss';
+import axios from './axios';
+
+type Note = {
+  title: string;
+  body: string;
+}
 
 function App() {
+  // ノート一覧
+  const [notes, setNotes] = useState<Note[]>();
+
+  // サイドバーの表示フラグ
   const flag = false;
+
+  // Sidebar----------------------------------------
+  // ノート一覧を表示
+  useEffect(() => {
+    // async function fetchData() {
+    //   const request = await axios.get('/note/test');
+    //   console.log(request.data.results);
+    //   // set(request.data.results);
+    //   // return request;
+    // }
+    // fetchData();
+    fetch("http://back:8080/note/test", {method: 'GET'})
+      .then(res => res.json())
+      .then(json => {
+        console.log(json);
+      });
+      // .catch(error => {
+      //   console.log('fetch error----------------------');
+      //   console.log(error);
+      // });
+  }, []);
+
+  // Content----------------------------------------
+
+
   return (
     <div className="App">
       {/* Sidebar------------------------------------------ */}
@@ -25,6 +60,9 @@ function App() {
           <li>使ってみる</li>
           <li>クイックメモ</li>
           <li>タスク管理</li>
+          {notes?.map((note, i) => (
+            <li>note.title</li>
+          ))}
         </ul>
 
         {/* メニュー下部 */}

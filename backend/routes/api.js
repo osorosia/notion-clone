@@ -15,6 +15,20 @@ router.get('/hello', function(req, res, next) {
 
 const Note = require('../models/note');
 
+router.get('/note/test', function(req, res, next) {
+  console.log('[/note/test] start------------------------');
+  const note1 = new Note({
+    title: 'aaaaa',
+    body: 'bbbbbbbbb',
+  });
+  const note2 = new Note({
+    title: 'cccc',
+    body: 'dddddddddd',
+  });
+  console.log('[/note/test] end--------------------------');
+  res.json([note1, note2]);
+});
+
 router.get('/note', function(req, res, next) {
   Note.find({}, (err, note) => {
     console.log(note);
