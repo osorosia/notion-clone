@@ -41,6 +41,10 @@ router.delete('/note/delete', function(req, res, next) {
   console.log('[DELETE /note/delete] start-------------------------------');
   // 削除するidを指定
   const query = { _id: req.query.id};
+  
+  // idが未定義ならNG
+  if (!query._id)
+    return res.json({ result: 'ng' });
 
   // DBから削除
   Note.findOneAndRemove(query, (err) => {
