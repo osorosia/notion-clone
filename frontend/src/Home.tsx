@@ -76,7 +76,13 @@ function Home() {
 
   // ノート削除
   const deleteNote = (id: string) => {
-
+    const fetchDelete = async () => {
+      const url = `http://localhost:8080/api/note/delete?_id=${id}`;
+      const res = await fetch(url, {method: 'DELETE'})
+      const json = await res.json();
+      console.log(json);
+    };
+    fetchDelete();
   };
 
   return (
