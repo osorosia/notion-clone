@@ -43,29 +43,28 @@ function Home() {
   // Sidebar----------------------------------------
   // ノート一覧を表示
   useEffect(() => {
-    fetch("http://localhost:8080/api/note", {method: 'GET'})
-      .then(res => res.json())
-      .then(json => {
-        console.log('setNotes()', json);
-        setNotes(json);
-      });
+    const fetchGet = async () => {
+      const url = "http://localhost:8080/api/note";
+      const res = await fetch(url, {method: 'GET'});
+      const json = await res.json();
+      console.log('setNotes()', json);
+      setNotes(json);
+    }
+    fetchGet();
   }, []);
   
   // Content----------------------------------------
   // ノートIDに応じたノートをコンテントに表示
   useEffect(() => {
-    // クエリパラメータ作成
-    const url = `http://localhost:8080/api/note?_id=${noteId}`;
-    console.log(url);
-
-    // APIからノート取得
-    fetch(url, {method: 'GET'})
-    .then(res => res.json())
-    .then(json => {
+    const fetchGet = async () => {
+      const url = `http://localhost:8080/api/note?_id=${noteId}`;
+      const res = await fetch(url, {method: 'GET'});
+      const json = await res.json();
       console.log('setNowNote()', json[0]);
       setNowNote(json[0]);
       setNoteTitle(json[0].title);
-    });
+    };
+    fetchGet();
   }, [noteId]);
 
   // タイトル変更
