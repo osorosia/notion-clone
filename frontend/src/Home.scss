@@ -34,3 +34,12 @@ body {
   display: flex;
   min-height: 100vh;
 }
+
+button {
+  outline: none;
+  border: none;
+  background: rgba(0, 0, 0, 0);
+  &:hover {
+    background: rgba(55, 53, 47, 0.08);
+  };
+}

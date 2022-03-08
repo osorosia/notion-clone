@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Link, Outlet } from 'react-router-dom';
 import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import { Link, Outlet } from 'react-router-dom';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import './Home.scss';
 
 type Note = {
@@ -10,7 +12,7 @@ type Note = {
   body: string;
 }
 
-const defaultNote = {
+const defaultNote: Note = {
   _id: '',
   title: '',
   body: '',
@@ -26,15 +28,17 @@ const getUrlId = (): string => {
 };
 
 function Home() {
+  // - サイドバー
   // ノート一覧
   const [notes, setNotes] = useState<Note[]>();
   // 開いているノートID
   const [noteId, setNoteId] = useState<string>(getUrlId());
   // 開いてるノート
   const [nowNote, setNowNote] = useState<Note>(defaultNote);
-
+  // タイトル
+  const [noteTitle, setNoteTitle] = useState<string>('');
   // サイドバーの表示フラグ
-  const flag = false;
+  const [visibleSidebar, setVisibleSidebar] = useState<boolean>(true);
 
   // Sidebar----------------------------------------
   // ノート一覧を表示
@@ -60,15 +64,27 @@ function Home() {
     .then(json => {
       console.log('setNowNote()', json[0]);
       setNowNote(json[0]);
+      setNoteTitle(json[0].title);
     });
   }, [noteId]);
+
+  // タイトル変更
+  const onChangeTitle = (title: string) => {
+    setNoteTitle(title);
+    // DBにPUTする
+  };
+
+  // ノート削除
+  const deleteNote = (id: string) => {
+
+  };
 
   return (
     <div className="Home">
       {/* Sidebar------------------------------------------ */}
       <div
         className="sidebar"
-        style={{display: flag ? 'none' : ''}}
+        style={{display: visibleSidebar ? '' : 'none'}}
       >
         {/* ヘッダー */}
         <p>○○さんのNotion</p>
@@ -83,15 +99,23 @@ function Home() {
         {/* ノート一覧 */}
         <ul>
           {notes?.map((note, i) => (
-            <li><Link
-              className='sidebar-link'
-              to={note._id}
-              key={i}
-              onClick={() => setNoteId(note._id)}
-            >
-              <StickyNote2OutlinedIcon />
-              {note.title}
-            </Link></li>
+            <li>
+              <Link
+                className='sidebar-link'
+                to={note._id}
+                key={i}
+                onClick={() => setNoteId(note._id)}
+              >
+                <StickyNote2OutlinedIcon />
+                {note.title}
+              </Link>
+              {/* 削除ボタン */}
+              <button
+                onClick={() => {deleteNote(note._id)}}
+              >
+                <DeleteOutlineOutlinedIcon />
+              </button>
+            </li>
           ))}
           <li>
             <AddOutlinedIcon />
@@ -110,10 +134,22 @@ function Home() {
       {/* Content------------------------------------------- */}
       <div className="content">
         {/* ヘッダー */}
-        <p>title</p>
+        <button
+          onClick={() => setVisibleSidebar(!visibleSidebar)}
+          style={{display: 'inline-block'}}
+        >
+          <MenuOutlinedIcon />
+        </button>
+        <p style={{display: 'inline-block'}}>{nowNote.title}</p>
+
         {/* タイトル */}
-        {console.log('nowNote', nowNote)}
-        <p>{nowNote.title}</p>
+        <p>
+          <input
+            type='text'
+            value={noteTitle}
+            onChange={(e) => onChangeTitle(e.target.value)}
+          />
+        </p>
         {/* 本文 */}
         <p>{nowNote.body}</p>
       </div>
