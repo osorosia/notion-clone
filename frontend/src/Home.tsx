@@ -86,9 +86,7 @@ function Home() {
           <li>インポート</li>
           <li>ゴミ箱</li>
         </ul>
-
       </div>
-
       
       {/* Content------------------------------------------- */}
       <div className="content">
