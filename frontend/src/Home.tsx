@@ -66,6 +66,7 @@ function Home() {
         <ul>
           {notes?.map((note, i) => (
             <li><Link
+              className='sidebar-link'
               to={note._id}
               key={i}
               onClick={() => setNoteId(note._id)}
