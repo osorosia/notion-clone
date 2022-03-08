@@ -10,6 +10,12 @@ type Note = {
   body: string;
 }
 
+const defaultNote = {
+  _id: '',
+  title: '',
+  body: '',
+} as const;
+
 // URLからノートIDを取得する
 const getUrlId = (): string => {
   // "localhost:3000/aa/bb" -> "/aa/bb"
@@ -24,6 +30,8 @@ function Home() {
   const [notes, setNotes] = useState<Note[]>();
   // 開いているノートID
   const [noteId, setNoteId] = useState<string>(getUrlId());
+  // 開いてるノート
+  const [nowNote, setNowNote] = useState<Note>(defaultNote);
 
   // サイドバーの表示フラグ
   const flag = false;
@@ -31,10 +39,10 @@ function Home() {
   // Sidebar----------------------------------------
   // ノート一覧を表示
   useEffect(() => {
-    fetch("http://localhost:8080/api/note/test", {method: 'GET'})
+    fetch("http://localhost:8080/api/note", {method: 'GET'})
       .then(res => res.json())
       .then(json => {
-        console.log(json);
+        console.log('setNotes()', json);
         setNotes(json);
       });
   }, []);
@@ -42,7 +50,17 @@ function Home() {
   // Content----------------------------------------
   // ノートIDに応じたノートをコンテントに表示
   useEffect(() => {
-    console.log(noteId, '---------------------');
+    // クエリパラメータ作成
+    const url = `http://localhost:8080/api/note?_id=${noteId}`;
+    console.log(url);
+
+    // APIからノート取得
+    fetch(url, {method: 'GET'})
+    .then(res => res.json())
+    .then(json => {
+      console.log('setNowNote()', json[0]);
+      setNowNote(json[0]);
+    });
   }, [noteId]);
 
   return (
@@ -93,13 +111,11 @@ function Home() {
       <div className="content">
         {/* ヘッダー */}
         <p>title</p>
+        {/* タイトル */}
+        {console.log('nowNote', nowNote)}
+        <p>{nowNote.title}</p>
         {/* 本文 */}
-        <p>title</p>
-        <ul>
-          <li>aaa</li>
-          <li>bbbb</li>
-          <li>ccccc</li>
-        </ul>
+        <p>{nowNote.body}</p>
       </div>
     </div>
   );
