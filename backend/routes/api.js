@@ -40,7 +40,7 @@ router.post('/note/new', function(req, res, next) {
 router.delete('/note/delete', function(req, res, next) {
   console.log('[DELETE /note/delete] start-------------------------------');
   // 削除するidを指定
-  const query = { _id: req.query.id};
+  const query = { _id: req.query._id};
   
   // idが未定義ならNG
   if (!query._id)

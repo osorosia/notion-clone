@@ -2,7 +2,7 @@ GET http://localhost:8080/api/note
 ###
 GET http://localhost:8080/api/note?_id=6227448eb6c177475c40c96c
 ###
-DELETE http://localhost:8080/api/note/delete?id=6227448eb6c177475c40c96c
+DELETE http://localhost:8080/api/note/delete?_id=6227448eb6c177475c40c96c
 ###
 POST http://localhost:8080/api/note/new
 content-type: application/json
