@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import './App.scss';
 import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { Link, Outlet } from 'react-router-dom';
@@ -11,11 +10,20 @@ type Note = {
   body: string;
 }
 
+// URLからノートIDを取得する
+const getUrlId = (): string => {
+  // "localhost:3000/aa/bb" -> "/aa/bb"
+  const pathname = window.location.pathname;
+  // "/aa/bb" -> "bb"
+  const id = pathname.split('/').slice(-1)[0];
+  return id;
+};
+
 function Home() {
   // ノート一覧
   const [notes, setNotes] = useState<Note[]>();
-  // パス
-  const [path, setPath] = useState<string>('');
+  // 開いているノートID
+  const [noteId, setNoteId] = useState<string>(getUrlId());
 
   // サイドバーの表示フラグ
   const flag = false;
@@ -30,18 +38,15 @@ function Home() {
         setNotes(json);
       });
   }, []);
-
   
-
   // Content----------------------------------------
-  const nextUrl = (id: string) => {
-    return '.' + id;
-  };
-
+  // ノートIDに応じたノートをコンテントに表示
+  useEffect(() => {
+    console.log(noteId, '---------------------');
+  }, [noteId]);
 
   return (
     <div className="Home">
-      {console.log(window.location.pathname)}
       {/* Sidebar------------------------------------------ */}
       <div
         className="sidebar"
@@ -59,10 +64,11 @@ function Home() {
 
         {/* ノート一覧 */}
         <ul>
-          {notes?.map((note) => (
+          {notes?.map((note, i) => (
             <li><Link
               to={note._id}
-              key={nextUrl(note._id)}
+              key={i}
+              onClick={() => setNoteId(note._id)}
             >
               <StickyNote2OutlinedIcon />
               {note.title}
@@ -96,7 +102,6 @@ function Home() {
           <li>ccccc</li>
         </ul>
       </div>
-      <Outlet />
     </div>
   );
 }
