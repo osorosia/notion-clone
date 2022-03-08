@@ -5,6 +5,7 @@ query=$(cat <<EOS
   
   db.notes.insert(
     {
+      _id: '6227448eb6c177475c40c96c',
       title: 'test_title', 
       body: 'test_body',
     }
