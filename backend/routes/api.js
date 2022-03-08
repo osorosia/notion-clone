@@ -1,5 +1,6 @@
 const { application } = require('express');
 var express = require('express');
+const { default: mongoose } = require('mongoose');
 var router = express.Router();
 
 const Note = require('../models/note');
@@ -53,14 +54,26 @@ router.post('/note/new', function(req, res, next) {
 
   // DBに保存
   note.save((err) => {
-    if (err) {
-      console.log(err);
-      res.json( {result: 'ng'} );
-    }
+    if (err) res.json( {result: 'ng'} );
     else {
       console.log('[POST /note/new] end---------------------------------');
       res.json({ result: 'ok' });
     }
+  });
+});
+
+router.delete('/note/delete', function(req, res, next) {
+  console.log('[DELETE /note/delete] start-------------------------------');
+  // 削除するidを指定
+  const query = { _id: req.query.id};
+  
+  // DBから削除
+  Note.findOneAndRemove(query, (err) => {
+    if (err) res.json({ result: 'ng' });
+    else {
+      console.log('[DELETE /note/delete] end---------------------------------');
+      res.json({ result: 'ok' })
+    };
   });
 });
 
