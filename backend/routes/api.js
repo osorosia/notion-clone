@@ -5,31 +5,6 @@ var router = express.Router();
 
 const Note = require('../models/note');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-router.get('/hello', function(req, res, next) {
-  var param = {'result': 'Hello'};
-  res.header('Content-Type', 'application/json; charset=utf-8');
-  res.json(param);
-});
-
-router.get('/note/test', function(req, res, next) {
-  console.log('[/note/test] start------------------------');
-  const note1 = new Note({
-    title: 'aaaaa',
-    body: 'bbbbbbbbb',
-  });
-  const note2 = new Note({
-    title: 'cccc',
-    body: 'dddddddddd',
-  });
-  console.log('[/note/test] end--------------------------');
-  res.json([note1, note2]);
-});
-
 router.get('/note', function(req, res, next) {
   console.log('[GET /note] start---------------------------------');
   // クエリパラメータ作成
@@ -66,7 +41,7 @@ router.delete('/note/delete', function(req, res, next) {
   console.log('[DELETE /note/delete] start-------------------------------');
   // 削除するidを指定
   const query = { _id: req.query.id};
-  
+
   // DBから削除
   Note.findOneAndRemove(query, (err) => {
     if (err) res.json({ result: 'ng' });
