@@ -46,7 +46,6 @@ router.post('/note/new', function(req, res, next) {
     if (err) console.log('ng', err);
     else console.log('ok');
   });
-  
 });
 
 module.exports = router;
