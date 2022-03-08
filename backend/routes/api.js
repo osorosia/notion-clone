@@ -38,11 +38,8 @@ router.get('/note', function(req, res, next) {
 
 router.post('/note/new', function(req, res, next) {
   console.log('[POST /note/new] start---------------------------------');
-  const note = new Note({
-    title: 'ahoho',
-    body: 'testes',
-  });
   console.log(req.body);
+  const note = new Note(req.body);
   console.log(note);
   note.save((err) => {
     if (err) {
