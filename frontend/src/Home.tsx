@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -29,6 +29,7 @@ const getUrlId = (): string => {
 };
 
 function Home() {
+  let navigate = useNavigate();
   // - サイドバー
   // ノート一覧
   const [notes, setNotes] = useState<Note[]>();
@@ -82,6 +83,22 @@ function Home() {
       const url = `http://localhost:8080/api/note/delete?_id=${id}`;
       const res = await axios.delete(url);
       const json = res.data;
+
+      // ノート一覧を更新
+      const nextNotes = notes?.slice().filter((note, i, arr) => {
+        return id !== note._id;
+      });
+      setNotes(nextNotes);
+      
+      // 開いてるノートを消した場合、1番上のノートにリダイレクト
+      if (id === noteId) {
+        if (notes) {
+          setNoteId(notes[0]._id);
+          navigate('/' + notes[0]._id);
+        }
+        else
+          navigate('/');
+      }
     };
     fetchDelete();
   };
