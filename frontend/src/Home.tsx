@@ -123,7 +123,9 @@ function Home() {
         {/* ノート一覧 */}
         <ul>
           {notes?.map((note, i) => (
-            <li>
+            <li
+              style={{ background: note?._id == noteId ? "rgba(55, 53, 47, 0.08)" : ""}}
+            >
               <Link
                 className='sidebar-link'
                 to={note._id}
