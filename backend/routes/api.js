@@ -56,4 +56,30 @@ router.delete('/note/delete', function(req, res, next) {
   });
 });
 
+router.put('/note/update', function(req, res, next) {
+  console.log('[PUT /note/update] start-------------------------------');
+  // 対象のid
+  const query = { _id: req.query._id};
+  if (!query._id)
+    return res.json({ result: 'ng' });
+
+  // 更新する内容
+  let params = {};
+  if (req.body.title) params.title = req.body.title;
+  if (req.body.body) params.body = req.body.body;
+
+  // 更新内容がなければng
+  if (!Object.keys(params).length)
+    return res.json({ result: 'ng' });
+
+  console.log('aaaaa');
+  // DBを更新
+  Note.updateOne(query, params, (err) => {
+    if (err)
+      return res.json({ result: 'ng' });
+    console.log('[PUT /note/update] end---------------------------------');
+    res.json({ result: 'ok' });
+  });
+});
+
 module.exports = router;

@@ -9,6 +9,23 @@ content-type: application/json
 
 {
     "_id": "6227448eb6c177475c40c96c",
-    "title": "aaaaaa",
-    "body": "bbbbbbbbbbbb"
+    "title": "test_title",
+    "body": "test_body"
+}
+
+###
+PUT http://localhost:8080/api/note/update?_id=6227448eb6c177475c40c96c
+content-type: application/json
+
+{
+    "title": "update_title",
+    "body": "update_body"
+}
+###
+POST http://localhost:8080/api/note/new
+content-type: application/json
+
+{
+    "title": "title2",
+    "body": "body1"
 }
