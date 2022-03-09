@@ -4,6 +4,7 @@ import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import axios from 'axios';
 import './Home.scss';
 
 type Note = {
@@ -45,8 +46,9 @@ function Home() {
   useEffect(() => {
     const fetchGet = async () => {
       const url = "http://localhost:8080/api/note";
-      const res = await fetch(url, {method: 'GET'});
-      const json = await res.json();
+      const res = await axios.get(url);
+      const json = res.data;
+
       console.log('setNotes()', json);
       setNotes(json);
     }
@@ -58,8 +60,9 @@ function Home() {
   useEffect(() => {
     const fetchGet = async () => {
       const url = `http://localhost:8080/api/note?_id=${noteId}`;
-      const res = await fetch(url, {method: 'GET'});
-      const json = await res.json();
+      const res = await axios.get(url);
+      const json = res.data;
+
       console.log('setNowNote()', json[0]);
       setNowNote(json[0]);
       setNoteTitle(json[0].title);
@@ -77,9 +80,8 @@ function Home() {
   const deleteNote = (id: string) => {
     const fetchDelete = async () => {
       const url = `http://localhost:8080/api/note/delete?_id=${id}`;
-      const res = await fetch(url, {method: 'DELETE'})
-      const json = await res.json();
-      console.log(json);
+      const res = await axios.delete(url);
+      const json = res.data;
     };
     fetchDelete();
   };
