@@ -72,9 +72,19 @@ function Home() {
   }, [noteId]);
 
   // タイトル変更
-  const onChangeTitle = (title: string) => {
+  const onChangeTitle = (_id: string, title: string) => {
     setNoteTitle(title);
     // DBにPUTする
+    const fetchUpdate = async () => {
+      const url = `http://localhost:8080/api/note/update?_id=${_id}`;
+      const params = { title: noteTitle };
+      const res = await axios.put(url, params);
+      const json = res.data;
+
+      if (json.result == 'ng')
+        console.log('update error');
+    };
+    fetchUpdate();
   };
 
   // ノート削除
@@ -196,7 +206,7 @@ function Home() {
           <input
             type='text'
             value={noteTitle}
-            onChange={(e) => onChangeTitle(e.target.value)}
+            onChange={(e) => onChangeTitle(noteId, e.target.value)}
           />
         </p>
         {/* 本文 */}
