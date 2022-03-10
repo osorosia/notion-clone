@@ -32,7 +32,7 @@ router.post('/note/new', function(req, res, next) {
     if (err) res.json( {result: 'ng'} );
     else {
       console.log('[POST /note/new] end---------------------------------');
-      res.json({ result: 'ok' });
+      res.json({ result: 'ok', _id: note._id });
     }
   });
 });

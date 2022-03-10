@@ -54,7 +54,7 @@ function Home() {
       setNotes(json);
     }
     fetchGet();
-  }, []);
+  }, [noteId]);
   
   // Content----------------------------------------
   // ノートIDに応じたノートをコンテントに表示
@@ -103,6 +103,27 @@ function Home() {
     fetchDelete();
   };
 
+  // ノートを新規作成
+  const createNote = () => {
+    const fetchPost = async () => {
+      const url = 'http://localhost:8080/api/note/new';
+      const params = {
+        title: '',
+        body: '',
+      };
+      const res = await axios.post(url, params);
+      const json = res.data;
+
+      if (json.result === 'ng')
+        return;
+
+      // 新規ノートにリダイレクト
+      setNoteId(json._id);
+      navigate('/' + json.id);
+    };
+    fetchPost();
+  }
+
   return (
     <div className="Home">
       {/* Sidebar------------------------------------------ */}
@@ -133,7 +154,7 @@ function Home() {
                 onClick={() => setNoteId(note._id)}
               >
                 <StickyNote2OutlinedIcon />
-                {note.title}
+                {note.title === '' ? '無題' : note.title}
               </Link>
               {/* 削除ボタン */}
               <button
@@ -143,7 +164,9 @@ function Home() {
               </button>
             </li>
           ))}
-          <li>
+          <li
+            onClick={() => {createNote()}}
+          >
             <AddOutlinedIcon />
             ページを追加する
           </li>
