@@ -81,7 +81,7 @@ function Home() {
       const res = await axios.put(url, params);
       const json = res.data;
 
-      if (json.result == 'ng')
+      if (json.result === 'ng')
         console.log('update error');
     };
     fetchUpdate();
@@ -93,6 +93,9 @@ function Home() {
       const url = `http://localhost:8080/api/note/delete?_id=${id}`;
       const res = await axios.delete(url);
       const json = res.data;
+
+      if (json.result === 'ng')
+        return;
 
       // ノート一覧を更新
       const nextNotes = notes?.slice().filter((note, i, arr) => {
@@ -155,7 +158,7 @@ function Home() {
         <ul>
           {notes?.map((note, i) => (
             <li
-              style={{ background: note?._id == noteId ? "rgba(55, 53, 47, 0.08)" : ""}}
+              style={{ background: note?._id === noteId ? "rgba(55, 53, 47, 0.08)" : ""}}
             >
               <Link
                 className='sidebar-link'
