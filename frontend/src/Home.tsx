@@ -5,7 +5,9 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import axios from 'axios';
-import './Home.scss';
+import TextEditor from './components/TextEditor';
+import Title from './components/Title';
+import './Home.scss'; 
 
 type Row = {
   text: string;
@@ -221,17 +223,17 @@ function Home() {
 
         {/* タイトル */}
         <p>title</p>
-        <p>
-          <input
-            type='text'
-            value={noteTitle}
-            onChange={(e) => onChangeTitle(noteId, e.target.value)}
-          />
-        </p>
+        <Title
+          id={noteId}
+          title={nowNote.title}
+          onChangeTitle={onChangeTitle}
+        />
         {/* 本文 */}
         <p>body</p>
         {nowNote?.body.map((row, i) =>(
-          <p>{row.text}</p>
+          <TextEditor
+            text={row.text}
+          />
         ))}
       </div>
     </div>
