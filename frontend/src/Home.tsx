@@ -73,9 +73,18 @@ function Home() {
 
   // タイトル変更
   const onChangeTitle = (_id: string, title: string) => {
-    setNoteTitle(title);
+    if (_id === noteId)
+      setNoteTitle(title);
+    // ノート一覧を更新
+    let nextNotes = notes?.slice();
+    let nextNote = nextNotes?.find((elm) => elm._id === _id);
+    if (nextNote)
+      nextNote.title = title;
+    setNotes(nextNotes);
+
     // DBにPUTする
     const fetchUpdate = async () => {
+      await new Promise(resolve => setTimeout(resolve, 1000));
       const url = `http://localhost:8080/api/note/update?_id=${_id}`;
       const params = { title: noteTitle };
       const res = await axios.put(url, params);
