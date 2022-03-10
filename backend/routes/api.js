@@ -23,7 +23,6 @@ router.get('/note', function(req, res, next) {
 
 router.post('/note/new', function(req, res, next) {
   console.log('[POST /note/new] start---------------------------------');
-  console.log('req.body', req.body);
   //  req.bodyからNoteモデル作成
   const note = new Note(req.body);
   console.log(note);

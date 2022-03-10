@@ -7,17 +7,21 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import axios from 'axios';
 import './Home.scss';
 
+type Row = {
+  text: string;
+};
+
 type Note = {
   _id: string;
   title: string;
-  body: string;
-}
+  body: Array<Row>;
+};
 
 const defaultNote: Note = {
   _id: '',
   title: '',
-  body: '',
-} as const;
+  body: [{text: ''}],
+};
 
 // URLからノートIDを取得する
 const getUrlId = (): string => {
@@ -39,6 +43,8 @@ function Home() {
   const [nowNote, setNowNote] = useState<Note>(defaultNote);
   // タイトル
   const [noteTitle, setNoteTitle] = useState<string>('');
+  // ノートの内容
+  const [noteBody, setNoteBody] = useState<any[]>([]);
   // サイドバーの表示フラグ
   const [visibleSidebar, setVisibleSidebar] = useState<boolean>(true);
 
@@ -131,7 +137,7 @@ function Home() {
       const url = 'http://localhost:8080/api/note/new';
       const params = {
         title: '',
-        body: '',
+        body: [{text: ''}],
       };
       const res = await axios.post(url, params);
       const json = res.data;
@@ -214,6 +220,7 @@ function Home() {
         <p style={{display: 'inline-block'}}>{nowNote.title}</p>
 
         {/* タイトル */}
+        <p>title</p>
         <p>
           <input
             type='text'
@@ -222,7 +229,10 @@ function Home() {
           />
         </p>
         {/* 本文 */}
-        <p>{nowNote.body}</p>
+        <p>body</p>
+        {nowNote?.body.map((row, i) =>(
+          <p>{row.text}</p>
+        ))}
       </div>
     </div>
   );

@@ -9,8 +9,18 @@ content-type: application/json
 
 {
     "_id": "6227448eb6c177475c40c96c",
-    "title": "test_title",
-    "body": "test_body"
+    "title": "post_title",
+    "body": [
+        {
+            "text": "post_text1"
+        },
+        {
+            "text": "post_text2"
+        },
+        {
+            "text": "post_text3"
+        }
+    ]
 }
 
 ###
@@ -19,13 +29,33 @@ content-type: application/json
 
 {
     "title": "update_title",
-    "body": "update_body"
+    "body": [
+        {
+            "text": "update_text1"
+        },
+        {
+            "text": "update_text2"
+        },
+        {
+            "text": "update_text3"
+        }
+    ]
 }
 ###
 POST http://localhost:8080/api/note/new
 content-type: application/json
 
 {
-    "title": "title2",
-    "body": "body1"
+    "title": "new_title",
+    "body": [
+        {
+            "text": "new_text1"
+        },
+        {
+            "text": "new_text2"
+        },
+        {
+            "text": "new_text3"
+        }
+    ]
 }
