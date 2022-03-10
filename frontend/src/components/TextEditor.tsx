@@ -1,10 +1,9 @@
 import React from 'react';
-import './TextEditor.scss'
-
+import './TextEditor.scss';
 
 type Props = {
   text: string;
-}
+};
 
 const TextEditor = (props: Props) => {
   return (

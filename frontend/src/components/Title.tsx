@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './Title.scss';
 
 type Props = {
@@ -8,11 +8,10 @@ type Props = {
 };
 
 const Title = (props: Props) => {
-
   const handleInput = (e: any) => {
     console.log('edit title =>', e.target.innerHTML);
     const nextTitle = e.target.innerHTML;
-    props.onChangeTitle(props.id, nextTitle);    
+    props.onChangeTitle(props.id, nextTitle);
   };
 
   return (
