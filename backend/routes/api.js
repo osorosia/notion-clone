@@ -23,6 +23,7 @@ router.get('/note', function(req, res, next) {
 
 router.post('/note/new', function(req, res, next) {
   console.log('[POST /note/new] start---------------------------------');
+  console.log('req.body', req.body);
   //  req.bodyからNoteモデル作成
   const note = new Note(req.body);
   console.log(note);
@@ -72,7 +73,6 @@ router.put('/note/update', function(req, res, next) {
   if (!Object.keys(params).length)
     return res.json({ result: 'ng' });
 
-  console.log('aaaaa');
   // DBを更新
   Note.updateOne(query, params, (err) => {
     if (err)
