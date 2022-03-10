@@ -7,7 +7,6 @@ var mongoose = require('mongoose');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 
-var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
 
 var app = express();
@@ -39,7 +38,6 @@ db.on('error', console.error.bind(console, 'DB connection error:'));
 db.once('open', () => console.log('DB connection successful'));
 
 // router
-app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
