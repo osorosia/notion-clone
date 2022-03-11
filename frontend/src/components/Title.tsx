@@ -8,10 +8,16 @@ type Props = {
 };
 
 const Title = (props: Props) => {
+  const {
+    id,
+    title,
+    onChangeTitle,
+  } = props;
+
   const handleInput = (e: any) => {
     console.log('edit title =>', e.target.innerHTML);
     const nextTitle = e.target.innerHTML;
-    props.onChangeTitle(props.id, nextTitle);
+    onChangeTitle(id, nextTitle);
   };
 
   return (
@@ -21,7 +27,7 @@ const Title = (props: Props) => {
       className='title'
       onInput={handleInput}
     >
-      {props.title}
+      {title}
     </div>
   );
 };

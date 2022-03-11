@@ -2,9 +2,11 @@ import React from 'react';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
 const Header = (props: any) => {
-  const setVisibleSidebar = props.setVisibleSidebar;
-  const visibleSidebar = props.visibleSidebar;
-  const nowNote = props.nowNote;
+  const {
+    setVisibleSidebar,
+    visibleSidebar,
+    nowNote,
+  } = props;
 
   return (
     <div>

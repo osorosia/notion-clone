@@ -6,6 +6,10 @@ type Props = {
 };
 
 const TextEditor = (props: Props) => {
+  const {
+    text,
+  } = props;
+
   return (
     <div className='text-editor'>
       <div
@@ -13,7 +17,7 @@ const TextEditor = (props: Props) => {
         suppressContentEditableWarning={true}
         placeholder='入力してください'
       >
-        {props.text}
+        {text}
       </div>
     </div>
   );
