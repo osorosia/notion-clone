@@ -9,7 +9,8 @@ const TextEditor = (props: Props) => {
   return (
     <div>
       <div
-        contentEditable
+        contentEditable={true}
+        suppressContentEditableWarning={true}
         placeholder='入力してください'
       >
         {props.text}

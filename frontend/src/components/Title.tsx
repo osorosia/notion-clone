@@ -16,7 +16,8 @@ const Title = (props: Props) => {
 
   return (
     <div
-      contentEditable
+      contentEditable={true}
+      suppressContentEditableWarning={true}
       className='title'
       onInput={handleInput}
     >
