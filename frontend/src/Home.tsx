@@ -7,6 +7,7 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import axios from 'axios';
 import TextEditor from './components/TextEditor';
 import Title from './components/Title';
+import Header from './components/Header';
 import './Home.scss'; 
 
 type Row = {
@@ -202,34 +203,24 @@ function Home() {
           </li>
         </ul>
 
-        {/* メニュー下部 */}
-        <ul>
-          <li>テンプレート</li>
-          <li>インポート</li>
-          <li>ゴミ箱</li>
-        </ul>
       </div>
       
       {/* Content------------------------------------------- */}
       <div className="content">
         {/* ヘッダー */}
-        <button
-          onClick={() => setVisibleSidebar(!visibleSidebar)}
-          style={{display: 'inline-block'}}
-        >
-          <MenuOutlinedIcon />
-        </button>
-        <p style={{display: 'inline-block'}}>{nowNote.title}</p>
+        <Header
+          visibleSidebar={visibleSidebar}
+          setVisibleSidebar={setVisibleSidebar}
+          nowNote={nowNote}
+        />
 
         {/* タイトル */}
-        <p>title</p>
         <Title
           id={noteId}
           title={nowNote.title}
           onChangeTitle={onChangeTitle}
         />
         {/* 本文 */}
-        <p>body</p>
         {nowNote?.body.map((row, i) =>(
           <TextEditor
             text={row.text}

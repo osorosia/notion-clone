@@ -7,7 +7,7 @@ type Props = {
 
 const TextEditor = (props: Props) => {
   return (
-    <div>
+    <div className='text-editor'>
       <div
         contentEditable={true}
         suppressContentEditableWarning={true}
