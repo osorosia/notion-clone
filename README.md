@@ -1,4 +1,5 @@
 # notion-clone
+Notion (https://www.notion.so/) のクローンを作成しました。
 
 ## 使い方
 ```sh
