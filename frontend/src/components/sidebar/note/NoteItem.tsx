@@ -3,17 +3,32 @@ import React from 'react';
 const NoteItem = (props: any) => {
   const {
     note,
+    nowNoteId,
+    setNowNoteId,
     deleteNote,
   } = props;
 
   return (
-    <div className='sidebar-main-notes-item'>
-      <div className='sidebar-main-notes-item-icon'>
+    <div
+      className='sidebar-main-notes-item'
+      style={note._id === nowNoteId ? {
+        background: 'rgba(55, 53, 47, 0.08)',
+        color: 'rgb(55, 53, 47)',
+      } : {}}
+    >
+      <div
+        className='sidebar-main-notes-item-icon'
+        onClick={() => setNowNoteId(note._id)}
+      >
         <svg viewBox="0 0 30 30">
           <path d="M16,1H4v28h22V11L16,1z M16,3.828L23.172,11H16V3.828z M24,27H6V3h8v10h10V27z M8,17h14v-2H8V17z M8,21h14v-2H8V21z M8,25h14v-2H8V25z" />
         </svg>
       </div>
-      <div className='sidebar-main-notes-item-text' placeholder='無題'>
+      <div
+        className='sidebar-main-notes-item-text'
+        placeholder='無題'
+        onClick={() => setNowNoteId(note._id)}
+      >
         {note.title}
       </div>
 

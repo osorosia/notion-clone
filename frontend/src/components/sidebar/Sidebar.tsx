@@ -7,16 +7,18 @@ const Sidebar = (props: any) => {
   const {
     notes,
     setNotes,
+    nowNoteId,
+    setNowNoteId, 
     visibleSidebar,
     setVisibleSidebar,
   } = props;
 
   // ノートを新規作成
   const createNote = () => {
-    console.log('createNote():', 'call');
+    console.log('createNote():', 'call >>');
 
     const fetchPost = async () => {
-      const newNote: Note = {
+      let newNote: Note = {
         title: '',
         body: [{text: ''}],
       };
@@ -26,10 +28,11 @@ const Sidebar = (props: any) => {
       const params = newNote;
       const res = await axios.post(url, params);
       const json = res.data;
-
+      
+      console.log('createNote():', 'json', json);
       if (json.result === 'ng')
         return;
-      console.log('createNote():', json._id);
+      newNote._id = json._id;
 
       // 成功したらノート一覧を更新
       const nextNotes = notes.slice();
@@ -37,16 +40,16 @@ const Sidebar = (props: any) => {
       setNotes(nextNotes);
 
       // 現在のノートIDを更新
-      // TODO
+      setNowNoteId(json._id);
 
-      console.log('createNote():', 'success');
+      console.log('createNote():', '<< success');
     }
     fetchPost();
   }
 
   // ノートを削除
   const deleteNote = (_id: string) => {
-    console.log('deleteNote(): call');
+    console.log('deleteNote():', 'call');
 
     const fetchDelete = async () => {
       // 削除するノートID
@@ -56,6 +59,7 @@ const Sidebar = (props: any) => {
       const res = await axios.delete(url);
       const json = res.data;
 
+      console.log('deleteNote():', 'json', json);
       if (json.result === 'ng')
         return;
       
@@ -64,8 +68,12 @@ const Sidebar = (props: any) => {
         return _id !== note._id;
       });
       setNotes(nextNotes);
+
       // 削除されたIDが現在のIDなら、一番上のノートを開く
-      console.log('deleteNote(): success');
+      if (_id === nowNoteId)
+        setNowNoteId(notes.length ? notes[0]._id : '');
+      
+      console.log('deleteNote():', 'success');
     }
     fetchDelete();
   }
@@ -106,6 +114,8 @@ const Sidebar = (props: any) => {
           {notes.map((note: any) => (
             <NoteItem
               note={note}
+              nowNoteId={nowNoteId}
+              setNowNoteId={setNowNoteId}
               deleteNote={deleteNote}
             />
           ))}

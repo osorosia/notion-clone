@@ -14,10 +14,12 @@ router.get('/note', function(req, res, next) {
   if (req.query.title) query.title = req.query.title;
 
   // DBから取得
-  Note.find(query, (err, note) => {
-    console.log(note);
+  Note.find(query, (err, notes) => {
+    if (err)
+      return res.json({result: 'ng'});
+    console.log(notes);
     console.log('[GET /note] end-----------------------------------');
-    res.json(note);
+    res.json({result: 'ok', notes: notes});
   });
 });
 
