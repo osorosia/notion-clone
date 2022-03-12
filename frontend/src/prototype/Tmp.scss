@@ -131,7 +131,7 @@ svg {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 4px;
+        margin-right: 10px;
       }
 
       &-text {
@@ -203,9 +203,9 @@ svg {
 
   // main
   &-main {
-    padding: 0px 96px;
 
     &-title {
+      padding: 0px 96px;
       min-height: 162px;
       display: flex;
       align-items: flex-end;
@@ -227,14 +227,46 @@ svg {
     }
 
     &-body {
-      padding-top: 5px;
+      padding-top: 10px;
       // 1行
       &-line {
-        &-add-button {
+        display: flex;
 
+        &-left {
+          display: flex;
+          flex-basis: 96px;
+        }
+
+        &-center {
+          flex: 1;
+        }
+
+        &-right {
+          flex-basis: 96px;
+        }
+          
+
+        &-add-button {
+          margin-left: auto;
+          display: flex;
+          align-items: center;
+          padding: 0px 2px;
+          &:hover {
+            background: rgba(55, 53, 47, 0.08);
+          }
+          &-icon {
+          }
         }
         &-move-button {
-
+          display: flex;
+          align-items: center;
+          padding: 0px 2px;
+          margin-right: 10px;
+          &:hover {
+            background: rgba(55, 53, 47, 0.08);
+          }
+          &-icon {
+          }
         }
         &-text-editor {
           &:focus {
