@@ -1,0 +1,150 @@
+body {
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Hiragino Sans GB", メイリオ, Meiryo, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  margin: 0px;
+}
+
+ul {
+  list-style: none;
+  // padding: 0;
+}
+
+svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+  fill: rgba(55, 53, 47, 0.45);
+  flex-shrink: 0;
+  backface-visibility: hidden;
+}
+
+.Tmp {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  color:rgba(25, 23, 17, 0.6);
+  background-color: rgb(247, 246, 243);
+  width: 25%;
+  font-size: 14px;
+  // padding: 0.5rem, 1rem;
+
+  // サイドバーのヘッダー
+  &-header {
+    height: 45px;
+    display: flex;
+
+    &:hover {
+      background: rgba(55, 53, 47, 0.08);
+    }
+
+    &-text {
+      color: #37352F;
+      flex: 1;
+    }
+  }
+
+  // サイドバー本体
+  &-main {
+
+    // ノート一覧
+    &-notes {
+      // ノート1つ
+      &-item {
+        display: flex;
+        padding: 2px 14px;
+        // width: 100%;
+        min-height: 27px;;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:hover {
+          background: rgba(55, 53, 47, 0.08);
+        }
+
+        &-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 4px;
+        }
+
+        &-text {
+        }
+
+        // ゴミ箱
+        &-menu-icon {
+          margin-left: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &:hover {
+            background: rgba(55, 53, 47, 0.08);
+          }
+        }
+      }
+    }
+
+    // 新規ノート
+    &-new-note {
+      display: flex;
+      padding: 2px 14px;
+      // width: 100%;
+      min-height: 27px;;
+      // font-size: 14px;
+      box-sizing: border-box;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(55, 53, 47, 0.08);
+      }
+      display: flex;
+
+      &-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 4px;
+      }
+
+      &-text {
+        // font-weight: bold;
+      }
+    }
+
+  }
+}
+
+.content {
+  flex: 1;
+  
+  &-header {
+
+  }
+
+  &-main {
+    &-title {
+
+    }
+
+    &-body {
+      // 1行
+      &-line {
+        &-add-button {
+
+        }
+        &-move-button {
+
+        }
+        &-text-editor {
+          &:focus {
+            outline: none;
+            &:empty:before {
+              content: attr(placeholder);
+            }
+          }
+        }
+      }
+    }
+  }  
+}
