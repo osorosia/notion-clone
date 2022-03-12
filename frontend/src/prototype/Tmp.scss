@@ -27,7 +27,6 @@ svg {
   background-color: rgb(247, 246, 243);
   width: 25%;
   font-size: 14px;
-  // padding: 0.5rem, 1rem;
 
   // サイドバーのヘッダー
   &-header {
@@ -94,6 +93,10 @@ svg {
         }
 
         &-text {
+          flex: 1;
+          &:empty:before {
+            content: attr(placeholder);
+          }
         }
 
         // ゴミ箱
@@ -239,11 +242,11 @@ svg {
             // プレースホルダー
             &:empty:before {
               content: attr(placeholder);
-              color: rgba(55, 53, 47, 0.15);
+              color: rgba(55, 53, 47, 0.5);
             }
           }
         }
       }
     }
-  }  
+  }
 }
