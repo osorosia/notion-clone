@@ -8,8 +8,21 @@ const Tmp = () => {
       <div className='sidebar'>
         {/* ヘッダー */}
         <div className='sidebar-header'>
-          <div className='sidebar-header-text'>
-            ○○さんのNotion
+          {/* left */}
+          <div className='sidebar-header-left'>
+            <div className='sidebar-header-username'>
+              <div className='sidebar-header-username-text'>
+                ○○さんのNotion
+              </div>
+            </div>
+          </div>
+          {/* right */}
+          <div className='sidebar-header-right'>
+            <div className='sidebar-header-sidebar-button'>
+              <div className='sidebar-header-sidebar-button-icon'>
+                sidebar
+              </div>
+            </div>
           </div>
         </div>
 
@@ -81,7 +94,26 @@ const Tmp = () => {
       <div className='content'>
         {/* ヘッダー */}
         <div className='content-header'>
-          
+          <div className='content-header-left'>
+            {/* サイドバー開閉ボタン */}
+            <div className='content-header-sidebar-button'>
+              <div className='content-header-sidebar-button-icon'>
+                sidebar
+              </div>
+            </div>
+            <div className='content-header-title'>
+              <div className='content-header-title-text'>
+                header-title
+              </div>
+            </div>
+          </div>
+          <div className='content-header-right'>
+            <div className='content-header-menu-button'>
+              <div className='content-header-menu-button-icon'>
+                menu
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* メイン */}

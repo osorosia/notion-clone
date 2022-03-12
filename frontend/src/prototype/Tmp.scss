@@ -33,14 +33,35 @@ svg {
   &-header {
     height: 45px;
     display: flex;
+    padding: 0px 12px;
 
     &:hover {
       background: rgba(55, 53, 47, 0.08);
     }
 
-    &-text {
-      color: #37352F;
-      flex: 1;
+    &-left {
+      display: flex;
+    }
+
+    &-right {
+      display: flex;
+      margin-left: auto;
+    }
+
+    &-username {
+      display: flex;
+      align-items: center;
+      &-text {
+        color: #37352F;
+      }
+    }
+
+    &-sidebar-button {
+      display: flex;
+      align-items: center;
+      &-icon {
+
+      }
     }
   }
 
@@ -115,14 +136,55 @@ svg {
   }
 }
 
+// コンテンツ
 .content {
   flex: 1;
   
+  // ヘッダー
   &-header {
+    display: flex;
+    min-height: 45px;
+    padding: 0px 12px;
 
+    &-left {
+      display: flex;
+    }
+
+    &-right {
+      display: flex;
+      margin-left: auto;
+    }
+
+    &-sidebar-button {
+      display: flex;
+      align-items: center;
+      margin-right: 4px;
+      &-icon {
+
+      }
+    }
+
+    &-title {
+      display: flex;
+      align-items: center;
+      &-text {
+
+      }
+    }
+
+    &-menu-button {
+      display: flex;
+      align-items: center;
+      &-icon {
+
+      }
+    }
   }
 
+  // main
   &-main {
+    padding: 0px 96px;
+
     &-title {
 
     }
@@ -139,8 +201,10 @@ svg {
         &-text-editor {
           &:focus {
             outline: none;
+            // プレースホルダー
             &:empty:before {
               content: attr(placeholder);
+              color: #aaa;
             }
           }
         }
