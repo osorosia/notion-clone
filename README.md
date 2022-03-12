@@ -4,6 +4,8 @@ Notion (https://www.notion.so/) のクローンを作成しました。
 ## 使い方
 ```sh
 docker-compose up -d
+# TODO
+#  -> http://localhost:3000/
 
 # shell 1
 cd backend
@@ -18,9 +20,16 @@ npm start
 
 ## ↓↓どこまでやるか未定
 
+## 構成
+- フロントエンド
+  - React.js (React Hooks)
+- バックエンド
+  - express.js
+  - MongoDB
+
 ## やったこと
-- ノート新規作成
-- ノート削除
+- Dockerで開発環境を構築
+- ノート新規作成、削除、編集
 - サイドバー開閉ボタン
 
 ## やってないこと
@@ -29,6 +38,8 @@ npm start
 
 ## 工夫したこと
 - 学習目的でuseContext, useReducer, useMemoを使用した
-  - props drillingを一部回避 (useContext + useReducer)
-  - 再レンダリングを極力減らした (useMemo)
+  - useContext, useReducer
+    - props drillingを回避
+  - useMemo
+    - 再レンダリングを極力減らした
 - SCSSを使ったスタイルコーディング
