@@ -1,0 +1,284 @@
+body {
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Hiragino Sans GB", メイリオ, Meiryo, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  margin: 0px;
+}
+
+ul {
+  list-style: none;
+  // padding: 0;
+}
+
+svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+  fill: rgba(55, 53, 47, 0.45);
+  flex-shrink: 0;
+  backface-visibility: hidden;
+}
+
+.Home {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  color:rgba(25, 23, 17, 0.6);
+  background-color: rgb(247, 246, 243);
+  width: 25%;
+  font-size: 14px;
+
+  // サイドバーのヘッダー
+  &-header {
+    height: 45px;
+    display: flex;
+    padding: 0px 12px;
+
+    &:hover {
+      background: rgba(55, 53, 47, 0.08);
+    }
+
+    &-left {
+      display: flex;
+    }
+
+    &-right {
+      display: flex;
+      margin-left: auto;
+    }
+
+    &-username {
+      display: flex;
+      align-items: center;
+      &-text {
+        color: #37352F;
+      }
+    }
+
+    &-sidebar-button {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      &:hover {
+        background: rgba(55, 53, 47, 0.08);
+      }
+      &-icon {
+      }
+    }
+  }
+
+  // サイドバー本体
+  &-main {
+
+    // ノート一覧
+    &-notes {
+      // ノート1つ
+      &-item {
+        display: flex;
+        padding: 2px 14px;
+        // width: 100%;
+        min-height: 27px;;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:hover {
+          background: rgba(55, 53, 47, 0.08);
+        }
+
+        &-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 4px;
+        }
+
+        &-text {
+          flex: 1;
+          &:empty:before {
+            content: attr(placeholder);
+          }
+        }
+
+        // ゴミ箱
+        &-menu-icon {
+          margin-left: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &:hover {
+            background: rgba(55, 53, 47, 0.08);
+          }
+        }
+      }
+    }
+
+    // 新規ノート
+    &-new-note {
+      display: flex;
+      padding: 2px 14px;
+      // width: 100%;
+      min-height: 27px;;
+      // font-size: 14px;
+      box-sizing: border-box;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(55, 53, 47, 0.08);
+      }
+      display: flex;
+
+      &-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+      }
+
+      &-text {
+        // font-weight: bold;
+      }
+    }
+
+  }
+}
+
+// コンテンツ
+.content {
+  flex: 1;
+  
+  // ヘッダー
+  &-header {
+    display: flex;
+    min-height: 45px;
+    padding: 0px 12px;
+
+    &-left {
+      display: flex;
+    }
+
+    &-right {
+      display: flex;
+      margin-left: auto;
+    }
+
+    &-sidebar-button {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      margin-right: 4px;
+      &:hover {
+        background: rgba(55, 53, 47, 0.08);
+      }
+      &-icon {
+      }
+      svg {
+        width: 16px;
+        height: 16px;
+        display: block;
+        fill: rgba(55, 53, 47, 0.45);
+        flex-shrink: 0;
+        backface-visibility: hidden;
+      }
+    }
+
+    &-title {
+      display: flex;
+      align-items: center;
+      &-text {
+
+      }
+    }
+
+    &-menu-button {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      &:hover {
+        background: rgba(55, 53, 47, 0.08);
+      }
+      &-icon {
+      }
+    }
+  }
+
+  // main
+  &-main {
+
+    &-title {
+      padding: 0px 96px;
+      min-height: 162px;
+      display: flex;
+      align-items: flex-end;
+      &-text-editor {
+        flex: 1;
+        font-weight: 700;
+        font-size: 40px;
+        box-sizing: border-box;
+        white-space: nowrap;
+        // プレースホルダー
+        &:empty:before {
+          content: attr(placeholder);
+          color: rgba(55, 53, 47, 0.15);
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    &-body {
+      padding-top: 10px;
+      // 1行
+      &-line {
+        display: flex;
+
+        &-left {
+          display: flex;
+          flex-basis: 96px;
+        }
+
+        &-center {
+          flex: 1;
+        }
+
+        &-right {
+          flex-basis: 96px;
+        }
+          
+
+        &-add-button {
+          margin-left: auto;
+          display: flex;
+          align-items: center;
+          padding: 0px 2px;
+          &:hover {
+            background: rgba(55, 53, 47, 0.08);
+          }
+          &-icon {
+          }
+        }
+        &-move-button {
+          display: flex;
+          align-items: center;
+          padding: 0px 2px;
+          margin-right: 10px;
+          &:hover {
+            background: rgba(55, 53, 47, 0.08);
+          }
+          &-icon {
+          }
+        }
+        &-text-editor {
+          &:focus {
+            outline: none;
+            // プレースホルダー
+            &:empty:before {
+              content: attr(placeholder);
+              color: rgba(55, 53, 47, 0.5);
+            }
+          }
+        }
+      }
+    }
+  }
+}
