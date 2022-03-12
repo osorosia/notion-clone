@@ -185,7 +185,10 @@ svg {
       display: flex;
       align-items: center;
       &-text {
-
+        // プレースホルダー
+        &:empty:before {
+          content: attr(placeholder);
+        }
       }
     }
 

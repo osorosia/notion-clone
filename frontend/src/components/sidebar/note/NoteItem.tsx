@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { NoteContext } from '../../Home';
 
 const NoteItem = (props: any) => {
   const {
@@ -8,14 +9,19 @@ const NoteItem = (props: any) => {
     deleteNote,
   } = props;
 
+  const {nowNote, dispatch} = useContext(NoteContext);
+
   return (
     <div
       className='sidebar-main-notes-item'
-      style={note._id === nowNoteId ? {
-        background: 'rgba(55, 53, 47, 0.08)',
-        color: 'rgb(55, 53, 47)',
-      } : {}}
+      style={
+        note._id === nowNoteId ? {
+          background: 'rgba(55, 53, 47, 0.08)',
+          color: 'rgb(55, 53, 47)',
+        } : {} 
+      }
     >
+      {console.log('[NoteItem]', 'rendering')}
       <div
         className='sidebar-main-notes-item-icon'
         onClick={() => setNowNoteId(note._id)}

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { NoteContext } from '../Home';
 
 const Content = (props: any) => {
   const {
@@ -6,8 +7,11 @@ const Content = (props: any) => {
     setVisibleSidebar,
   } = props;
 
+  const {nowNote} = useContext(NoteContext);
+
   return (
     <div className='content'>
+      {console.log('[Content]', 'rendering')}
       {/* ヘッダー */}
       <div className='content-header'>
         <div className='content-header-left'>
@@ -24,8 +28,8 @@ const Content = (props: any) => {
             </div>
           </div>
           <div className='content-header-title'>
-            <div className='content-header-title-text'>
-              header-title
+            <div className='content-header-title-text' placeholder='無題'>
+              {nowNote.title}
             </div>
           </div>
         </div>
