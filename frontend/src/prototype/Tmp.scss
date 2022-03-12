@@ -59,8 +59,11 @@ svg {
     &-sidebar-button {
       display: flex;
       align-items: center;
+      padding: 12px;
+      &:hover {
+        background: rgba(55, 53, 47, 0.08);
+      }
       &-icon {
-
       }
     }
   }
@@ -158,9 +161,20 @@ svg {
     &-sidebar-button {
       display: flex;
       align-items: center;
+      padding: 12px;
       margin-right: 4px;
+      &:hover {
+        background: rgba(55, 53, 47, 0.08);
+      }
       &-icon {
-
+      }
+      svg {
+        width: 16px;
+        height: 16px;
+        display: block;
+        fill: rgba(55, 53, 47, 0.45);
+        flex-shrink: 0;
+        backface-visibility: hidden;
       }
     }
 
@@ -175,8 +189,11 @@ svg {
     &-menu-button {
       display: flex;
       align-items: center;
+      padding: 12px;
+      &:hover {
+        background: rgba(55, 53, 47, 0.08);
+      }
       &-icon {
-
       }
     }
   }
@@ -186,10 +203,28 @@ svg {
     padding: 0px 96px;
 
     &-title {
-
+      min-height: 162px;
+      display: flex;
+      align-items: flex-end;
+      &-text-editor {
+        flex: 1;
+        font-weight: 700;
+        font-size: 40px;
+        box-sizing: border-box;
+        white-space: nowrap;
+        // プレースホルダー
+        &:empty:before {
+          content: attr(placeholder);
+          color: rgba(55, 53, 47, 0.15);
+        }
+        &:focus {
+          outline: none;
+        }
+      }
     }
 
     &-body {
+      padding-top: 5px;
       // 1行
       &-line {
         &-add-button {
@@ -204,7 +239,7 @@ svg {
             // プレースホルダー
             &:empty:before {
               content: attr(placeholder);
-              color: #aaa;
+              color: rgba(55, 53, 47, 0.15);
             }
           }
         }
