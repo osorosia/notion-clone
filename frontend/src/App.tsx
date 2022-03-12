@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 // import Home from './old/Home';
-import Home from './Home';
+import Home from './components/Home';
 import Tmp from './prototype/Tmp';
 
 function App() {
