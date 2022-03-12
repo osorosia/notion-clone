@@ -8,8 +8,8 @@ type Line = {
   text: string;
 };
 
-type Note = {
-  _id: string;
+export type Note = {
+  _id?: string;
   title: string;
   body: Array<Line>;
 };
@@ -86,6 +86,7 @@ const Home = () => {
         {/* サイドバー */}
         <Sidebar
           notes={notes}
+          setNotes={setNotes}
           visibleSidebar={visibleSidebar}
           setVisibleSidebar={setVisibleSidebar}
         />

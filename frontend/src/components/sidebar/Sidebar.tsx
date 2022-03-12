@@ -1,12 +1,74 @@
 import React from 'react';
 import NoteItem from './note/NoteItem';
+import axios from 'axios';
+import { Note } from '../Home';
 
 const Sidebar = (props: any) => {
   const {
     notes,
+    setNotes,
     visibleSidebar,
     setVisibleSidebar,
   } = props;
+
+  // ノートを新規作成
+  const createNote = () => {
+    console.log('createNote():', 'call');
+
+    const fetchPost = async () => {
+      const newNote: Note = {
+        title: '',
+        body: [{text: ''}],
+      };
+      
+      // DBに新規ノートをpost
+      const url = 'http://localhost:8080/api/note/new';
+      const params = newNote;
+      const res = await axios.post(url, params);
+      const json = res.data;
+
+      if (json.result === 'ng')
+        return;
+      console.log('createNote():', json._id);
+
+      // 成功したらノート一覧を更新
+      const nextNotes = notes.slice();
+      nextNotes.push(newNote);
+      setNotes(nextNotes);
+
+      // 現在のノートIDを更新
+      // TODO
+
+      console.log('createNote():', 'success');
+    }
+    fetchPost();
+  }
+
+  // ノートを削除
+  const deleteNote = (_id: string) => {
+    console.log('deleteNote(): call');
+
+    const fetchDelete = async () => {
+      // 削除するノートID
+      console.log('deleteNote(): _id =', _id);
+      // DBから削除
+      const url = `http://localhost:8080/api/note/delete?_id=${_id}`;
+      const res = await axios.delete(url);
+      const json = res.data;
+
+      if (json.result === 'ng')
+        return;
+      
+      // 削除できたらノート一覧を更新
+      let nextNotes = notes?.slice().filter((note: any) => {
+        return _id !== note._id;
+      });
+      setNotes(nextNotes);
+      // 削除されたIDが現在のIDなら、一番上のノートを開く
+      console.log('deleteNote(): success');
+    }
+    fetchDelete();
+  }
 
   return (
     <div className='sidebar'
@@ -41,13 +103,19 @@ const Sidebar = (props: any) => {
       <div className='sidebar-main'>
         {/* ノート一覧 */}
         <div className='sidebar-main-notes'>
-          {notes.map((note: any, index: any) => (
-            <NoteItem note={note} index={index} />
+          {notes.map((note: any) => (
+            <NoteItem
+              note={note}
+              deleteNote={deleteNote}
+            />
           ))}
         </div>
 
         {/* ノート新規作成 */}
-        <div className='sidebar-main-new-note'>
+        <div
+          className='sidebar-main-new-note'
+          onClick={createNote}
+        >
           <div className='sidebar-main-new-note-icon'>
             <svg viewBox="0 0 16 16">
               <path d="M7.977 14.963c.407 0 .747-.324.747-.723V8.72h5.362c.399 0 .74-.34.74-.747a.746.746 0 00-.74-.738H8.724V1.706c0-.398-.34-.722-.747-.722a.732.732 0 00-.739.722v5.529h-5.37a.746.746 0 00-.74.738c0 .407.341.747.74.747h5.37v5.52c0 .399.332.723.739.723z" />
@@ -57,6 +125,7 @@ const Sidebar = (props: any) => {
             Add a page
           </div>
         </div>
+
       </div>
     </div>
   );
