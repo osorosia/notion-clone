@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import axios from 'axios';
 import Sidebar from './sidebar/Sidebar';
 import Content from './content/Content';
@@ -20,15 +20,52 @@ const defaultNote: Note = {
   body: [{text: ''}],
 };
 
+type Action = {
+  type: string;
+  params: any;
+};
+
+const reducerNote = (state: any, action: any) : any => {
+  let note = Object.assign({}, state);
+  const {type, params} = action;
+  console.log('dispatch:', type);
+
+  // ノートをセットする
+  if (type === 'set_note') {
+
+  }
+
+  // タイトルをセットする
+  if (type === 'set_title') {
+
+  }
+
+  // 行を編集する
+  if (type === 'edit_line') {
+
+  }
+
+  // 行を入れ替える
+  if (type === 'swap_line') {
+
+  }
+
+  // 行を挿入する
+  if (type === 'insert_line') {
+
+  }
+}
+
 const Home = () => {
   // 現在のid
   const [nowNoteId, setNowNoteId] = useState<string>('');
   // サイドバー開閉フラグ
   const [visibleSidebar, setVisibleSidebar] = useState<boolean>(true);
   // 現在のノート
-  const [nowNote, setNowNote] = useState<Note>(defaultNote);
+  // const [nowNote, setNowNote] = useState<Note>(defaultNote);
+  const [note, dispatch] = useReducer(reducerNote, defaultNote);
   // ノート一覧
-  const [notes, setNotes] = useState<Note[]>();
+  const [notes, setNotes] = useState<Note[]>([defaultNote]);
 
   // ノート一覧を取得
   useEffect(() => {
@@ -45,10 +82,19 @@ const Home = () => {
 
   return (
     <div className='Home'>
-      {/* サイドバー */}
-      <Sidebar />
-      {/* コンテンツ */}
-      <Content />
+      <>
+        {/* サイドバー */}
+        <Sidebar
+          notes={notes}
+          visibleSidebar={visibleSidebar}
+          setVisibleSidebar={setVisibleSidebar}
+        />
+        {/* コンテンツ */}
+        <Content
+          visibleSidebar={visibleSidebar}
+          setVisibleSidebar={setVisibleSidebar}
+        />
+      </>
     </div>
   );
 };
