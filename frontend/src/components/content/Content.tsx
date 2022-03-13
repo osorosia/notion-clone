@@ -58,7 +58,7 @@ const Content = (props: any) => {
             suppressContentEditableWarning
             placeholder='無題'
           >
-            title
+            {nowNote.title}
           </div>
         </div>
         {/* ボディ */}
