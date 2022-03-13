@@ -112,8 +112,9 @@ const Sidebar = (props: any) => {
       <div className='sidebar-main'>
         {/* ノート一覧 */}
         <div className='sidebar-main-notes'>
-          {notes.map((note: any) => (
+          {notes.map((note: any, i: number) => (
             <NoteItem
+              key={i}
               note={note}
               nowNoteId={nowNoteId}
               setNowNoteId={setNowNoteId}
