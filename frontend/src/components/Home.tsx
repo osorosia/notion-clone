@@ -58,36 +58,20 @@ const Home = () => {
       console.log('useEffect:', 'ノート一覧を取得:', 'json', json);
 
       setNotes(json.notes);
+      
       console.log('useEffect:', 'ノート一覧を取得:', '<< success');
     }
     fetchGet();
   }, []);
 
-  // 現在IDのノートを取得
-  useEffect(() => {
-    console.log('useEffect:', '現在IDのノートを取得:', 'call >>');
-    // console.log('useEffect:', '現在IDのノートを取得:', 'nowNoteId =', nowNoteId);
-    const fetchGet = async () => {
-      const url = `http://localhost:8080/api/note?_id=${nowNoteId}`;
-      const res = await axios.get(url);
-      const json = res.data;
-
-      if (json.result === 'ng')
-        return;
-      if (json.notes.length !== 1)
-        return;
-      console.log('useEffect:', '現在IDのノートを取得:', 'json', json);
-
-      // 取得したノートをセット
-      const newNote = json.notes[0];
-      console.log('useEffect:', '現在IDのノートを取得:', '<< success');
-    }
-    fetchGet();
-  }, [nowNoteId]);
-
   useEffect(() => {
     navigate('/' + nowNoteId);
   }, [nowNoteId]);
+
+  useEffect(() => {
+    if (nowNoteId === '' && notes && notes.length > 0 && notes[0]._id)
+      setNowNoteId(notes[0]._id);
+  }, [notes]);
 
   return (
     <div className='Home'>
