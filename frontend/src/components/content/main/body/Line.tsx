@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const Line = (props: any) => {
   const {
@@ -12,9 +13,23 @@ const Line = (props: any) => {
 
   const [visibleButton, setVisibleButton] = useState(false);
 
+  // テキストを入力したとき
   const handleInput = (e: any) => {
-    const userInput = e.target.innerHTML;
-    console.log(userInput);
+    const fetchUpdate = async () => {
+      const userInput = e.target.innerHTML;
+      console.log(userInput);
+      nowNote.body[index].text = userInput;
+      
+      const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
+      const params = { body: nowNote.body };
+      const res = await axios.put(url, params);
+      const json = res.data;
+
+      console.log('DB', json.result)
+      if (json.result === 'ng')
+        return;
+    };
+    fetchUpdate();
   };
 
   const handleKeyPress = (e: any) => {
@@ -22,6 +37,11 @@ const Line = (props: any) => {
       return;
     if (e.key !== 'Enter')
       return;
+    console.log('Enter!!!');
+    // 1行を下に挿入
+    
+    // フォーカスを1行下に当てる
+
     return e.preventDefault();
   };
 

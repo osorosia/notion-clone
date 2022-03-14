@@ -30,7 +30,6 @@ const Title = (props: any) => {
     
     // DBに送信
     const fetchPost = async () => {
-      await new Promise(resolve => setTimeout(resolve, 1000));
       const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
       const params = { title: nextTitle };
       const res = await axios.put(url, params);
