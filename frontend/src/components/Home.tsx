@@ -1,10 +1,9 @@
-import React, { useEffect, useReducer, useState, createContext, useMemo} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from './sidebar/Sidebar';
 import Content from './content/Content';
 import './Home.scss';
 import { useNavigate } from 'react-router-dom';
-
 
 type Line = {
   text: string;
@@ -16,7 +15,7 @@ export type Note = {
   body: Array<Line>;
 };
 
-const defaultNote: Note = {
+export const defaultNote: Note = {
   _id: '',
   title: '',
   body: [{text: ''}],
@@ -26,9 +25,6 @@ type Action = {
   type: string;
   params: any;
 };
-
-const defaultDispatch: React.Dispatch<any> = () => {};
-export const NoteContext = createContext({nowNote: defaultNote, dispatch: defaultDispatch});
 
 // URLからノートIDを取得する
 const getUrlId = (): string => {
@@ -40,50 +36,13 @@ const getUrlId = (): string => {
 };
 
 const Home = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   // 現在のid
   const [nowNoteId, setNowNoteId] = useState<string>(getUrlId());
   // サイドバー開閉フラグ
   const [visibleSidebar, setVisibleSidebar] = useState<boolean>(true);
   // ノート一覧
   const [notes, setNotes] = useState<Note[]>([defaultNote]);
-  
-  const reducerNote = (state: any, action: any) : any => {
-    console.log('dispatch:', 'state:', state);
-    console.log('dispatch:', 'action:', action);
-    let note = Object.assign({}, state);
-    const {type, params} = action;
-  
-    // ノートをセットする
-    if (type === 'set_note') {
-      console.log()
-      const { note } = params;
-      return note;
-    }
-  
-    // タイトルをセットする
-    if (type === 'set_title') {
-  
-    }
-  
-    // 行を編集する
-    if (type === 'edit_line') {
-  
-    }
-  
-    // 行を入れ替える
-    if (type === 'swap_line') {
-  
-    }
-  
-    // 行を挿入する
-    if (type === 'insert_line') {
-  
-    }
-  }
-  // 現在のノート
-  // const [nowNote, setNowNote] = useState<Note>(defaultNote);
-  const [nowNote, dispatch] = useReducer(reducerNote, defaultNote);
   
   // ノート一覧を取得
   useEffect(() => {
@@ -121,19 +80,11 @@ const Home = () => {
 
       // 取得したノートをセット
       const newNote = json.notes[0];
-      dispatch({
-        type: 'set_note',
-        params: {
-          note: newNote,
-        }
-      });
-      
       console.log('useEffect:', '現在IDのノートを取得:', '<< success');
     }
     fetchGet();
   }, [nowNoteId]);
 
-  // URLを現在IDに変更
   useEffect(() => {
     navigate('/' + nowNoteId);
   }, [nowNoteId]);
@@ -141,26 +92,28 @@ const Home = () => {
   return (
     <div className='Home'>
       {console.log('[Home]', 'rendering')}
-      <NoteContext.Provider value={{nowNote: nowNote, dispatch: dispatch}}>
-        {/* サイドバー */}
-        {
-          useMemo(() => (
-            <Sidebar
-                notes={notes}
-                setNotes={setNotes}
-                nowNoteId={nowNoteId}
-                setNowNoteId={setNowNoteId}
-                visibleSidebar={visibleSidebar}
-                setVisibleSidebar={setVisibleSidebar}
-              />
-          ), [notes, nowNoteId, visibleSidebar])
-        }
-        {/* コンテンツ */}
-        <Content
-          visibleSidebar={visibleSidebar}
-          setVisibleSidebar={setVisibleSidebar}
-        />
-      </NoteContext.Provider>
+      {/* サイドバー */}
+      <Sidebar
+        notes={notes}
+        setNotes={setNotes}
+        
+        nowNoteId={nowNoteId}
+        setNowNoteId={setNowNoteId}
+        
+        visibleSidebar={visibleSidebar}
+        setVisibleSidebar={setVisibleSidebar}
+      />
+      {/* コンテンツ */}
+      <Content
+        notes={notes}
+        setNotes={setNotes}
+
+        nowNoteId={nowNoteId}
+        setNowNoteId={setNowNoteId}
+
+        visibleSidebar={visibleSidebar}
+        setVisibleSidebar={setVisibleSidebar}
+      />
     </div>
   );
 };

@@ -2,13 +2,16 @@ import React from 'react';
 import NoteItem from './note/NoteItem';
 import axios from 'axios';
 import { Note } from '../Home';
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = (props: any) => {
   const {
     notes,
     setNotes,
+
     nowNoteId,
-    setNowNoteId, 
+    setNowNoteId,
+
     visibleSidebar,
     setVisibleSidebar,
   } = props;

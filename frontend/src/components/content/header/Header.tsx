@@ -2,9 +2,10 @@ import React from 'react';
 
 const Header = (props: any) => {
   const {
+    nowNoteTitle,
+    setNowNoteTitle,
     visibleSidebar,
     setVisibleSidebar,
-    nowNote,
   } = props;
 
   return (
@@ -24,7 +25,7 @@ const Header = (props: any) => {
         </div>
         <div className='content-header-title'>
           <div className='content-header-title-text' placeholder='無題'>
-            {nowNote.title}
+            {nowNoteTitle}
           </div>
         </div>
       </div>

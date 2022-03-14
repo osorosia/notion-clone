@@ -1,20 +1,76 @@
-import React, { useContext } from 'react';
-import { NoteContext } from '../Home';
-import Header from './Header';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import Header from './header/Header';
 import Line from './Line';
+import { Note, defaultNote } from '../Home';
+import axios from 'axios';
 
 const Content = (props: any) => {
   const {
+    notes,
+    setNotes,
+    nowNoteId,
+    setNowNoteId,
     visibleSidebar,
     setVisibleSidebar,
   } = props;
 
-  const {nowNote, dispatch} = useContext(NoteContext);
+  // 現在のノート
+  const [nowNote, setNowNote] = useState<Note>(defaultNote);
+  // ノートのタイトル
+  const [nowNoteTitle, setNowNoteTitle] = useState<string>('');
 
+  // 現在のノートをDBにから取得
+  useEffect(() => {
+    console.log('useEffect:', '現在IDのノートを取得:', 'call >>');
+    // console.log('useEffect:', '現在IDのノートを取得:', 'nowNoteId =', nowNoteId);
+    const fetchGet = async () => {
+      const url = `http://localhost:8080/api/note?_id=${nowNoteId}`;
+      const res = await axios.get(url);
+      const json = res.data;
+
+      if (json.result === 'ng')
+        return;
+      if (json.notes.length !== 1)
+        return;
+      console.log('useEffect:', '現在IDのノートを取得:', 'json', json);
+
+      // 取得したノートをセット
+      const newNote = json.notes[0];
+      setNowNote(newNote);
+      setNowNoteTitle(newNote.title);
+      console.log('useEffect:', '現在IDのノートを取得:', '<< success');
+    }
+    fetchGet();
+  }, [nowNoteId]);
+
+
+  // タイトル変更
   const handleInputTitle = (e: any) => {
-    console.log(e.target);
+    const nextTitle = e.target.innerHTML;
+    setNowNoteTitle(nextTitle);
+
+    // ノート一覧を更新
+    let nextNotes = notes?.slice();
+    let nextNote = nextNotes?.find((elm: any) => elm._id === nowNoteId);
+    if (nextNote)
+      nextNote.title = nextTitle;
+    setNotes(nextNotes);
+    
+    // DBに送信
+    const fetchPost = async () => {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
+      const params = { title: nextTitle };
+      const res = await axios.put(url, params);
+      const json = res.data;
+
+      if (json.result === 'ng')
+        console.log('POST error');
+    };
+    fetchPost();
   };
 
+  // タイトルフォーカス時のキー入力を制御
   const handleKeyPressTitle = (e: any) => {
     if (e.key === 'Enter')
       return e.preventDefault();
@@ -25,9 +81,11 @@ const Content = (props: any) => {
       {console.log('[Content]', 'rendering')}
       {/* ヘッダー */}
       <Header
+        nowNoteTitle={nowNoteTitle}
+        setNowNoteTitle={setNowNoteTitle}
+
         visibleSidebar={visibleSidebar}
         setVisibleSidebar={setVisibleSidebar}
-        nowNote={nowNote}
       />
 
       {/* メイン */}

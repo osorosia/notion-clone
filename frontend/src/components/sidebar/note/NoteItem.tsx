@@ -1,15 +1,13 @@
 import React, { useContext } from 'react';
-import { NoteContext } from '../../Home';
 
 const NoteItem = (props: any) => {
   const {
     note,
     nowNoteId,
     setNowNoteId,
+    setNowNoteTitle,
     deleteNote,
   } = props;
-
-  const {nowNote, dispatch} = useContext(NoteContext);
 
   return (
     <div
