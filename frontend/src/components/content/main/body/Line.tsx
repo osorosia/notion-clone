@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 
 const Line = (props: any) => {
-  const [visibleButton, setVisibleButton] = useState(false);
-
   const {
     index,
-    text,
+    line,
+    nowNote,
+    setNowNote,
   } = props;
+  
+  const { text } = line;
+
+  const [visibleButton, setVisibleButton] = useState(false);
 
   const handleInput = (e: any) => {
     const userInput = e.target.innerHTML;
@@ -18,7 +22,7 @@ const Line = (props: any) => {
       return;
     if (e.key !== 'Enter')
       return;
-    // 行を挿入
+    return e.preventDefault();
   };
 
   return (

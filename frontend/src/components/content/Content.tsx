@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import Header from './header/Header';
-import Line from './main/Line';
 import Title from './main/Title';
+import Body from './main/Body';
 import { Note, defaultNote } from '../Home';
 import axios from 'axios';
 
@@ -9,8 +9,10 @@ const Content = (props: any) => {
   const {
     notes,
     setNotes,
+
     nowNoteId,
     setNowNoteId,
+
     visibleSidebar,
     setVisibleSidebar,
   } = props;
@@ -19,6 +21,7 @@ const Content = (props: any) => {
   const [nowNote, setNowNote] = useState<Note>(defaultNote);
   // ノートのタイトル
   const [nowNoteTitle, setNowNoteTitle] = useState<string>('');
+
 
   // 現在のノートをDBにから取得
   useEffect(() => {
@@ -76,15 +79,10 @@ const Content = (props: any) => {
         />
 
         {/* ボディ */}
-        <div className='content-main-body'>
-          {nowNote.body.map((line: any, i: number) => (
-            <Line
-              key={i}
-              index={i}
-              text={line.text}
-            />
-          ))}
-        </div>
+        <Body 
+          nowNote={nowNote}
+          setNowNote={setNowNote}
+        />
 
       </div>
     </div>
