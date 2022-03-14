@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 // import Home from './old/Home';
 import Home from './components/Home';
+import DragTest from './prototype/drag/DragTest';
 import Tmp from './prototype/Tmp';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           {/* <Route path='/login' element={<Login />} /> */}
           {/* <Route path='/signin' element={<Signin />} /> */}
           <Route path='/tmp' element={<Tmp />} />
+          <Route path='/drag' element={<DragTest />} />
           <Route path='/*' element={<Home />} />
         </Routes>
       </BrowserRouter>
