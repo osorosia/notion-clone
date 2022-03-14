@@ -32,21 +32,7 @@ const Line = (props: any) => {
     fetchUpdate();
   };
 
-  const handleKeyPress = (e: any) => {
-    if (e.shiftKey)
-      return;
-    if (e.key !== 'Enter')
-      return;
-    console.log('Enter!!!');
-    // 1行を下に挿入
-    
-    // フォーカスを1行下に当てる
-
-    return e.preventDefault();
-  };
-
-  // 1行追加
-  const handleClickAdd = () => {
+  const addNewLine = () => {
     const fetchUpdate = async () => {
       // 現在のノートを更新
       let newBody = nowNote.body.slice();
@@ -63,7 +49,29 @@ const Line = (props: any) => {
         return;
     };
     fetchUpdate();
+  }
+
+  const handleKeyPress = (e: any) => {
+    // 下に1行挿入
+    if (!e.shiftKey && e.key === 'Enter') {
+      // 1行を下に挿入
+      addNewLine();
+      // フォーカスを1行下に当てる
+      
+      return e.preventDefault();
+    }
   };
+
+  // 1行追加
+  const handleClickAdd = () => {
+    addNewLine();
+  };
+
+  const handleKeyDown = (e: any) => {  
+    // 文字列が空ならブロック削除
+    if (e.key === 'Backspace' || e.key === 'Delete')
+      console.log(e.key);
+  }
 
   return (
     <div
@@ -74,6 +82,9 @@ const Line = (props: any) => {
       {console.log('[Line]', 'rendering')}
       {/* 左 */}
       <div className='content-main-body-line-left'>
+
+        {/* スタイルボタン */}
+        {/* TODO */}
         
         {/* 追加ボタン */}
         <div
@@ -109,6 +120,7 @@ const Line = (props: any) => {
           suppressContentEditableWarning
           onInput={handleInput}
           onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyDown}
           placeholder='テキストを入力してください'
           dangerouslySetInnerHTML={{ __html: text}}
         />
