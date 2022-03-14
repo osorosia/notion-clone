@@ -110,9 +110,8 @@ const Line = (props: any) => {
           onInput={handleInput}
           onKeyPress={handleKeyPress}
           placeholder='テキストを入力してください'
-        >
-          {text}
-        </div>
+          dangerouslySetInnerHTML={{ __html: text}}
+        />
       </div>
 
       {/* 右 */}
