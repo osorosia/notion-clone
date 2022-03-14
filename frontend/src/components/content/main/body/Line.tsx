@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import axios from 'axios';
 
 const Line = (props: any) => {
@@ -45,6 +45,26 @@ const Line = (props: any) => {
     return e.preventDefault();
   };
 
+  // 1行追加
+  const handleClickAdd = () => {
+    const fetchUpdate = async () => {
+      // 現在のノートを更新
+      let newBody = nowNote.body.slice();
+      newBody.splice(index + 1, 0, {text: ''});
+      setNowNote({...nowNote, body: newBody});
+      
+      const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
+      const params = { body: newBody };
+      const res = await axios.put(url, params);
+      const json = res.data;
+
+      console.log(json.result);
+      if (json.result === 'ng')
+        return;
+    };
+    fetchUpdate();
+  };
+
   return (
     <div
       className='content-main-body-line'
@@ -54,10 +74,12 @@ const Line = (props: any) => {
       {console.log('[Line]', 'rendering')}
       {/* 左 */}
       <div className='content-main-body-line-left'>
+        
         {/* 追加ボタン */}
         <div
           className='content-main-body-line-add-button'
           style={{display: visibleButton ? '' : 'none'}}
+          onClick={handleClickAdd}
         >
           <div className='content-main-body-line-add-button-icon'>
             <svg viewBox="0 0 16 16">
@@ -65,6 +87,7 @@ const Line = (props: any) => {
             </svg>
           </div>
         </div>
+        
         {/* 移動ボタン */}
         <div className='content-main-body-line-move-button'
           style={{display: visibleButton ? '' : 'none'}}
@@ -75,6 +98,7 @@ const Line = (props: any) => {
             </svg>
           </div>
         </div>
+
       </div>
 
       {/* 中央 */}
