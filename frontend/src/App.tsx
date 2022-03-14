@@ -9,6 +9,7 @@ import {
 import Home from './components/Home';
 import DragTest from './prototype/drag/DragTest';
 import DesignTest from './prototype/design/Design';
+import FocusTest from './prototype/focus/FocusTest';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           {/* <Route path='/signin' element={<Signin />} /> */}
           <Route path='/design' element={<DesignTest />} />
           <Route path='/drag' element={<DragTest />} />
+          <Route path='/focus' element={<FocusTest />} />
           <Route path='/*' element={<Home />} />
         </Routes>
       </BrowserRouter>
