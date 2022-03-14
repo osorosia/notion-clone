@@ -1,5 +1,5 @@
 import React from 'react';
-import './Tmp.scss';
+import './Design.scss';
 
 const Tmp = () => {
   return (

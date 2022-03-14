@@ -8,7 +8,7 @@ import {
 // import Home from './old/Home';
 import Home from './components/Home';
 import DragTest from './prototype/drag/DragTest';
-import Tmp from './prototype/Tmp';
+import DesignTest from './prototype/design/Design';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <Routes>
           {/* <Route path='/login' element={<Login />} /> */}
           {/* <Route path='/signin' element={<Signin />} /> */}
-          <Route path='/tmp' element={<Tmp />} />
+          <Route path='/design' element={<DesignTest />} />
           <Route path='/drag' element={<DragTest />} />
           <Route path='/*' element={<Home />} />
         </Routes>
