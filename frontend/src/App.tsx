@@ -10,6 +10,7 @@ import Home from './components/Home';
 import DragTest from './prototype/drag/DragTest';
 import DesignTest from './prototype/design/Design';
 import FocusTest from './prototype/focus/FocusTest';
+import ModalTest from './prototype/modal/ModalTest';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/design' element={<DesignTest />} />
           <Route path='/drag' element={<DragTest />} />
           <Route path='/focus' element={<FocusTest />} />
+          <Route path='/modal' element={<ModalTest />} />
           {/* ▲ sample */}
           <Route path='/*' element={<Home />} />
         </Routes>
