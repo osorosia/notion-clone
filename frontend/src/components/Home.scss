@@ -234,7 +234,8 @@ svg {
       // 1行
       &-line {
         display: flex;
-        padding: 5px 0px;
+        padding: 6px 0px;
+        line-height: 1.5;
 
         &-left {
           display: flex;
