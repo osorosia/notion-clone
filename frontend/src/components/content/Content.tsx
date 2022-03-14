@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import Header from './header/Header';
-import Line from './Line';
+import Line from './main/Line';
+import Title from './main/Title';
 import { Note, defaultNote } from '../Home';
 import axios from 'axios';
 
@@ -44,38 +45,6 @@ const Content = (props: any) => {
   }, [nowNoteId]);
 
 
-  // タイトル変更
-  const handleInputTitle = (e: any) => {
-    const nextTitle = e.target.innerHTML;
-    setNowNoteTitle(nextTitle);
-
-    // ノート一覧を更新
-    let nextNotes = notes?.slice();
-    let nextNote = nextNotes?.find((elm: any) => elm._id === nowNoteId);
-    if (nextNote)
-      nextNote.title = nextTitle;
-    setNotes(nextNotes);
-    
-    // DBに送信
-    const fetchPost = async () => {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
-      const params = { title: nextTitle };
-      const res = await axios.put(url, params);
-      const json = res.data;
-
-      if (json.result === 'ng')
-        console.log('POST error');
-    };
-    fetchPost();
-  };
-
-  // タイトルフォーカス時のキー入力を制御
-  const handleKeyPressTitle = (e: any) => {
-    if (e.key === 'Enter')
-      return e.preventDefault();
-  };
-
   return (
     <div className='content'>
       {console.log('[Content]', 'rendering')}
@@ -92,23 +61,25 @@ const Content = (props: any) => {
       <div className='content-main'>
 
         {/* タイトル */}
-        <div className='content-main-title'>
-          <div
-            className='content-main-title-text-editor'
-            contentEditable
-            suppressContentEditableWarning
-            onKeyPress={handleKeyPressTitle}
-            onInput={handleInputTitle}
-            placeholder='無題'
-          >
-            {nowNote.title}
-          </div>
-        </div>
+        <Title
+          notes={notes}
+          setNotes={setNotes}
+  
+          nowNoteId={nowNoteId}
+          setNowNoteId={setNowNoteId}
+
+          nowNote={nowNote}
+          setNowNote={setNowNote}
+
+          nowNoteTitle={nowNoteTitle}
+          setNowNoteTitle={setNowNoteTitle}
+        />
 
         {/* ボディ */}
         <div className='content-main-body'>
           {nowNote.body.map((line: any, i: number) => (
             <Line
+              key={i}
               index={i}
               text={line.text}
             />
