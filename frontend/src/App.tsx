@@ -21,9 +21,11 @@ function App() {
         <Routes>
           {/* <Route path='/login' element={<Login />} /> */}
           {/* <Route path='/signin' element={<Signin />} /> */}
+          {/* ▼ sample */}
           <Route path='/design' element={<DesignTest />} />
           <Route path='/drag' element={<DragTest />} />
           <Route path='/focus' element={<FocusTest />} />
+          {/* ▲ sample */}
           <Route path='/*' element={<Home />} />
         </Routes>
       </BrowserRouter>
