@@ -8,6 +8,9 @@ const Line = (props: any) => {
     line,
     nowNote,
     setNowNote,
+    
+    refs,
+    setFocusLineIndex,
   } = props;
 
   const { text } = line;
@@ -39,6 +42,9 @@ const Line = (props: any) => {
       let newBody = nowNote.body.slice();
       newBody.splice(index + 1, 0, {text: ''});
       setNowNote({...nowNote, body: newBody});
+
+      // 追加した行にフォーカス
+      setFocusLineIndex(index + 1);
       
       const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
       const params = { body: newBody };
@@ -57,8 +63,6 @@ const Line = (props: any) => {
     if (!e.shiftKey && e.key === 'Enter') {
       // 1行を下に挿入
       addNewLine();
-      // フォーカスを1行下に当てる
-      
       return e.preventDefault();
     }
   };
@@ -68,7 +72,7 @@ const Line = (props: any) => {
     addNewLine();
   };
 
-  const handleKeyDown = (e: any) => {  
+  const handleKeyDown = (e: any) => {
     // 文字列が空ならブロック削除
     if (e.key === 'Backspace' || e.key === 'Delete') {
       const nowText = nowNote.body[index].text.replace('<br>', '');
@@ -83,8 +87,8 @@ const Line = (props: any) => {
       newBody.splice(index, 1);
       setNowNote({...nowNote, body: newBody});
 
-      // 1つ上の行にフォーカス移動
-      // TODO
+      // 1行上をフォーカス
+      setFocusLineIndex(index - 1);
 
       const fetchUpdate = async () => {
         const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
@@ -145,6 +149,7 @@ const Line = (props: any) => {
         <div className='tes'>
           <div
             className='content-main-body-line-text-editor'
+            ref={el => refs.current[index] = el}
             contentEditable
             suppressContentEditableWarning
             onInput={handleInput}

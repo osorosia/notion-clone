@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Line from './body/Line';
 
 const Body = (props: any) => {
@@ -8,8 +8,23 @@ const Body = (props: any) => {
   } = props;
 
   // 選択している行
-  const [focusLineIndex, setFocusLineIndex] = useState<number>(-1);
-  
+  const [focusLineIndex, setFocusLineIndex] = useState<number>(0);
+
+  const refs = useRef(new Array(nowNote.body.length));
+
+  // フォーカス移動
+  useEffect(() => {
+    let index = focusLineIndex;
+    if (index < 0)
+      index = 0;
+    if (index >= nowNote.body.length)
+      index = nowNote.body.length - 1;
+
+    refs.current[index].focus();
+    // refs.current[index].setSelectionRange(nowNote.body[index].text.length - 1);
+
+  }, [focusLineIndex]);
+
   return (
     <div className='content-main-body'>
       {nowNote.body.map((line: any, i: number) => (
@@ -20,6 +35,9 @@ const Body = (props: any) => {
 
           nowNote={nowNote}
           setNowNote={setNowNote}
+          
+          refs={refs}
+          setFocusLineIndex={setFocusLineIndex}
         />
       ))}
     </div>
