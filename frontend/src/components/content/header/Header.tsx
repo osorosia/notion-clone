@@ -1,4 +1,5 @@
 import React from 'react';
+import SidebarSwitchButton from './SidebarSwitchButton';
 
 const Header = (props: any) => {
   const {
@@ -10,26 +11,24 @@ const Header = (props: any) => {
 
   return (
     <div className='content-header'>
+      {/* 左側 */}
       <div className='content-header-left'>
         {/* サイドバー開閉ボタン */}
-        <div
-          className='content-header-sidebar-button'
-          style={{display: visibleSidebar ? 'none' : ''}}
-          onClick={() => setVisibleSidebar(!visibleSidebar)}
-        >
-          <div className='content-header-sidebar-button-icon'>
-            <svg viewBox="0 0 14 14">
-                <path d="M0,1.25 L14,1.25 L14,2.75 L0,2.75 L0,1.25 Z M0,6.25 L14,6.25 L14,7.75 L0,7.75 L0,6.25 Z M0,11.25 L14,11.25 L14,12.75 L0,12.75 L0,11.25 Z" />
-            </svg>
-          </div>
-        </div>
+        <SidebarSwitchButton
+          visibleSidebar={visibleSidebar}
+          setVisibleSidebar={setVisibleSidebar}
+        />
+        {/* ノートのタイトル */}
         <div className='content-header-title'>
           <div className='content-header-title-text' placeholder='無題'>
             {nowNoteTitle}
           </div>
         </div>
       </div>
+
+      {/* 右側 */}
       <div className='content-header-right'>
+        {/* メニューボタン */}
         <div className='content-header-menu-button'>
           <div className='content-header-menu-button-icon'>
             <svg viewBox="0 0 13 3">
@@ -41,6 +40,7 @@ const Header = (props: any) => {
             </svg>
           </div>
         </div>
+
       </div>
     </div>
   );
