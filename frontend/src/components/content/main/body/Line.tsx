@@ -9,10 +9,10 @@ const Line = (props: any) => {
     nowNote,
     setNowNote,
   } = props;
-  
+
   const { text } = line;
 
-  const [visibleButton, setVisibleButton] = useState(false);
+  const [visibleButton, setVisibleButton] = useState<boolean>(false);
 
   // テキストを入力したとき
   const handleInput = (e: any) => {
@@ -20,7 +20,7 @@ const Line = (props: any) => {
       const userInput = e.target.innerHTML;
       console.log(userInput);
       nowNote.body[index].text = userInput;
-      
+
       const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
       const params = { body: nowNote.body };
       const res = await axios.put(url, params);
@@ -70,8 +70,35 @@ const Line = (props: any) => {
 
   const handleKeyDown = (e: any) => {  
     // 文字列が空ならブロック削除
-    if (e.key === 'Backspace' || e.key === 'Delete')
-      console.log(e.key);
+    if (e.key === 'Backspace' || e.key === 'Delete') {
+      const nowText = nowNote.body[index].text.replace('<br>', '');
+      console.log(e.key, nowText);
+
+      if (nowText !== '')
+        return;
+      if (nowNote.body.length < 2)
+        return;
+
+      let newBody = nowNote.body.slice();
+      newBody.splice(index, 1);
+      setNowNote({...nowNote, body: newBody});
+
+      // 1つ上の行にフォーカス移動
+      // TODO
+
+      const fetchUpdate = async () => {
+        const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
+        const params = { body: newBody };
+        const res = await axios.put(url, params);
+        const json = res.data;
+
+        console.log('DB', json.result);
+        if (json.result === 'ng')
+          return;
+      };
+      fetchUpdate();
+      return e.preventDefault();
+    }
   }
 
   return (
