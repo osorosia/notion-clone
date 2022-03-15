@@ -21,7 +21,6 @@ const Body = (props: any) => {
       index = nowNote.body.length - 1;
 
     refs.current[index].focus();
-    // refs.current[index].setSelectionRange(nowNote.body[index].text.length - 1);
 
   }, [focusLineIndex]);
 
