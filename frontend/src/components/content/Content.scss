@@ -1,0 +1,145 @@
+// コンテンツ
+.content {
+  flex: 1;
+  
+  // ヘッダー
+  &-header {
+    display: flex;
+    min-height: 45px;
+    padding: 0px 12px;
+
+    &-left {
+      display: flex;
+    }
+
+    &-right {
+      display: flex;
+      margin-left: auto;
+    }
+
+    &-sidebar-button {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      margin-right: 4px;
+      &:hover {
+        background: rgba(55, 53, 47, 0.08);
+      }
+      &-icon {
+      }
+      svg {
+        width: 16px;
+        height: 16px;
+        display: block;
+        fill: rgba(55, 53, 47, 0.45);
+        flex-shrink: 0;
+        backface-visibility: hidden;
+      }
+    }
+
+    &-title {
+      display: flex;
+      align-items: center;
+      &-text {
+        // プレースホルダー
+        &:empty:before {
+          content: attr(placeholder);
+        }
+      }
+    }
+
+    &-menu-button {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      &:hover {
+        background: rgba(55, 53, 47, 0.08);
+      }
+      &-icon {
+      }
+    }
+  }
+
+  // main
+  &-main {
+
+    &-title {
+      padding: 0px 96px;
+      min-height: 162px;
+      display: flex;
+      align-items: flex-end;
+      &-text-editor {
+        flex: 1;
+        font-weight: 700;
+        font-size: 40px;
+        box-sizing: border-box;
+        white-space: nowrap;
+        // プレースホルダー
+        &:empty:before {
+          content: attr(placeholder);
+          color: rgba(55, 53, 47, 0.15);
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    &-body {
+      padding-top: 10px;
+      // 1行
+      &-line {
+        display: flex;
+        padding: 6px 0px;
+
+        &-left {
+          display: flex;
+          flex-basis: 96px;
+        }
+
+        &-center {
+          flex: 1;
+        }
+
+        &-right {
+          flex-basis: 96px;
+        }
+          
+
+        &-add-button {
+          margin-left: auto;
+          display: flex;
+          align-items: center;
+          padding: 0px 2px;
+          &:hover {
+            background: rgba(55, 53, 47, 0.08);
+          }
+          &-icon {
+          }
+        }
+        &-move-button {
+          display: flex;
+          align-items: center;
+          padding: 0px 2px;
+          margin-right: 10px;
+          &:hover {
+            background: rgba(55, 53, 47, 0.08);
+          }
+          &-icon {
+          }
+        }
+        &-text-editor {
+          &:focus {
+            outline: none;
+            // プレースホルダー
+            &:empty:before {
+              content: attr(placeholder);
+              color: rgba(55, 53, 47, 0.5);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

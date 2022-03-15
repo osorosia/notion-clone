@@ -1,0 +1,148 @@
+
+.sidebar {
+  color:rgba(25, 23, 17, 0.6);
+  background-color: rgb(247, 246, 243);
+  width: 25%;
+  font-size: 14px;
+
+  // サイドバーのヘッダー
+  &-header {
+    height: 45px;
+    display: flex;
+    padding: 0px 12px;
+
+    &:hover {
+      background: rgba(55, 53, 47, 0.08);
+    }
+
+    &-left {
+      display: flex;
+    }
+
+    &-right {
+      display: flex;
+      margin-left: auto;
+    }
+
+    &-username {
+      display: flex;
+      align-items: center;
+      &-text {
+        color: #37352F;
+      }
+    }
+
+    &-sidebar-button {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      &:hover {
+        background: rgba(55, 53, 47, 0.08);
+      }
+      &-icon {
+      }
+    }
+  }
+
+  // サイドバー本体
+  &-main {
+    // 機能一覧
+    &-feature {
+      margin: 20px 0px;
+
+      // 検索機能
+      &-search {
+        display: flex;
+        padding: 2px 14px;
+        // width: 100%;
+        min-height: 27px;;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:hover {
+          background: rgba(55, 53, 47, 0.08);
+        }
+
+        &-icon {
+          display: flex;
+          align-items: center;
+          margin-right: 5px;
+        }
+        &-text {
+          flex: 1;
+          box-sizing: border-box;
+        }
+      }
+    }
+
+    // ノート一覧
+    &-notes {
+      // ノート1つ
+      &-item {
+        display: flex;
+        padding: 2px 14px;
+        // width: 100%;
+        min-height: 27px;;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:hover {
+          background: rgba(55, 53, 47, 0.08);
+        }
+
+        &-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 4px;
+        }
+
+        &-text {
+          flex: 1;
+          &:empty:before {
+            content: attr(placeholder);
+          }
+        }
+
+        // ゴミ箱
+        &-menu-icon {
+          margin-left: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &:hover {
+            background: rgba(55, 53, 47, 0.08);
+          }
+        }
+      }
+    }
+
+    // 新規ノート
+    &-new-note {
+      display: flex;
+      padding: 2px 14px;
+      // width: 100%;
+      min-height: 27px;;
+      // font-size: 14px;
+      box-sizing: border-box;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(55, 53, 47, 0.08);
+      }
+      display: flex;
+
+      &-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+      }
+
+      &-text {
+        // font-weight: bold;
+      }
+    }
+
+  }
+}
