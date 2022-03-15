@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import axios from 'axios';
+import './style.scss';
 
 const Line = (props: any) => {
   const {
@@ -114,16 +115,18 @@ const Line = (props: any) => {
 
       {/* 中央 */}
       <div className='content-main-body-line-center'>
-        <div
-          className='content-main-body-line-text-editor'
-          contentEditable
-          suppressContentEditableWarning
-          onInput={handleInput}
-          onKeyPress={handleKeyPress}
-          onKeyDown={handleKeyDown}
-          placeholder='テキストを入力してください'
-          dangerouslySetInnerHTML={{ __html: text}}
-        />
+        <div className='tes'>
+          <div
+            className='content-main-body-line-text-editor'
+            contentEditable
+            suppressContentEditableWarning
+            onInput={handleInput}
+            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyDown}
+            placeholder='テキストを入力してください'
+            dangerouslySetInnerHTML={{ __html: text}}
+          />
+        </div>
       </div>
 
       {/* 右 */}
