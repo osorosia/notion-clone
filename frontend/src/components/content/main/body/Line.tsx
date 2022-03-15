@@ -73,10 +73,15 @@ const Line = (props: any) => {
   };
 
   const handleKeyDown = (e: any) => {
+    if (e.key === 'ArrowDown')
+      setFocusLineIndex(index + 1);
+
+    if (e.key === 'ArrowUp')
+      setFocusLineIndex(index - 1);
+    
     // 文字列が空ならブロック削除
     if (e.key === 'Backspace' || e.key === 'Delete') {
       const nowText = nowNote.body[index].text.replace('<br>', '');
-      console.log(e.key, nowText);
 
       if (nowText !== '')
         return;
