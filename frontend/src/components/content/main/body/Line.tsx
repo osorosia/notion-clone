@@ -87,8 +87,11 @@ const Line = (props: any) => {
       newBody.splice(index, 1);
       setNowNote({...nowNote, body: newBody});
 
-      // 1行上をフォーカス
-      setFocusLineIndex(index - 1);
+      // フォーカスを変更
+      if (e.key === 'Backspace')
+        setFocusLineIndex(index - 1);
+      if (e.key === 'Delete')
+        setFocusLineIndex(index);
 
       const fetchUpdate = async () => {
         const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
