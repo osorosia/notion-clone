@@ -1,0 +1,62 @@
+.search-modal-window {
+  z-index: 2;
+  width: 50%;
+  padding: 1em;
+  background: #fff;
+  color: #37352F;
+
+  &-input {
+    display: flex;
+    // height: 52px;
+    padding: 7px 0px;
+    box-shadow: rgba(55, 53, 47, 0.09) 0px 1px 0px;
+    &-icon {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+    }
+    &-textbox {
+      flex: 1;
+      outline: none;
+      &:empty:before {
+        content: attr(placeholder);
+        color: rgba(55, 53, 47, 0.15);
+      }
+    }
+  }
+
+  // 検索結果
+  &-result {
+
+    &-note {
+      display: flex;
+      padding: 10px 0px;
+      // padding-left: 14px;
+
+      &:hover {
+        background: rgba(55, 53, 47, 0.08);
+      }
+
+      &-icon {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+      }
+
+      &-text {
+        flex: 1;
+      }
+    }
+  }
+
+  // 検索結果がない
+  &-non-result {
+    text-align: center;
+    color: rgba(55, 53, 47, 0.65);
+    padding: 14px;
+
+    p {
+      margin: 0
+    }
+  }
+}

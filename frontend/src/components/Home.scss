@@ -1,6 +1,7 @@
 body {
   font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Hiragino Sans GB", メイリオ, Meiryo, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
   margin: 0px;
+  line-height: 1.5;
 }
 
 ul {
@@ -15,6 +16,19 @@ svg {
   fill: rgba(55, 53, 47, 0.45);
   flex-shrink: 0;
   backface-visibility: hidden;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .Home {
@@ -69,6 +83,34 @@ svg {
 
   // サイドバー本体
   &-main {
+    // 機能一覧
+    &-feature {
+      margin: 20px 0px;
+
+      // 検索機能
+      &-search {
+        display: flex;
+        padding: 2px 14px;
+        // width: 100%;
+        min-height: 27px;;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:hover {
+          background: rgba(55, 53, 47, 0.08);
+        }
+
+        &-icon {
+          display: flex;
+          align-items: center;
+          margin-right: 5px;
+        }
+        &-text {
+          flex: 1;
+          box-sizing: border-box;
+        }
+      }
+    }
 
     // ノート一覧
     &-notes {
@@ -235,7 +277,6 @@ svg {
       &-line {
         display: flex;
         padding: 6px 0px;
-        line-height: 1.5;
 
         &-left {
           display: flex;
@@ -287,3 +328,4 @@ svg {
     }
   }
 }
+

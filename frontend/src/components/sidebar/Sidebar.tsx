@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NoteItem from './note/NoteItem';
 import axios from 'axios';
 import { Note } from '../Home';
+import Search from './search/Search';
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = (props: any) => {
@@ -113,6 +114,17 @@ const Sidebar = (props: any) => {
 
       {/* 本体 */}
       <div className='sidebar-main'>
+        {/* 機能一覧 */}
+        <div className='sidebar-main-feature'>
+          {/* 検索機能 */}
+          <Search
+            notes={notes}
+            setNotes={setNotes}
+            nowNoteId={nowNoteId}
+            setNowNoteId={setNowNoteId}
+          />
+        </div>
+
         {/* ノート一覧 */}
         <div className='sidebar-main-notes'>
           {notes.map((note: any, i: number) => (
