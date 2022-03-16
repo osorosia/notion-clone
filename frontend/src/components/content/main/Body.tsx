@@ -1,4 +1,5 @@
 import { arrayMoveImmutable, arrayMoveMutable } from 'array-move';
+import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { Container, Draggable, DropResult } from 'react-smooth-dnd';
 import Line from './body/Line';
@@ -30,6 +31,16 @@ const Body = (props: any) => {
     const {removedIndex, addedIndex } = dropResult;
     let newBody = arrayMoveImmutable(nowNote.body, removedIndex || 0, addedIndex || 0);
     setNowNote({...nowNote, body: newBody});
+
+    const fetchUpdate = async () => {
+      const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
+      const params = { body: newBody };
+      const res = await axios.put(url, params);
+      const json = res.data;
+
+      console.log('DB', json.result);
+    };
+    fetchUpdate();
   }
 
   return (
