@@ -77,9 +77,15 @@ const Home = () => {
         return;
 
       const nextNotes = json.notes.slice().sort((note1: Note, note2: Note) => {
-        return note1.note_id > note2.note_id;
+        if (note1.note_id < note2.note_id)
+          return -1;
+        else if (note1.note_id > note2.note_id)
+          return 1;
+        else
+          return 0;
       });
-      
+
+      console.log('nextNotes', nextNotes);
       setNotes(nextNotes);
     }
     fetchGet();

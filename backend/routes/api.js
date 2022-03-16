@@ -83,4 +83,27 @@ router.put('/note/update', function(req, res, next) {
   });
 });
 
+router.put('/note/swap', function(req, res, next) {
+  console.log('[PUT /note/swap] start-------------------------------');
+  const putSwap = async () => {
+    const query1 = { _id: req.query._id1};
+    const query2 = { _id: req.query._id2};
+
+    const note1 = await Note.findOne(query1);
+    const note2 = await Note.findOne(query2);
+    console.log('note1', note1);
+    console.log('note2', note2);
+
+    const note_id1 = note1.note_id;
+    const note_id2 = note2.note_id;
+
+    await Note.updateOne(query1, {note_id: note_id2});
+    await Note.updateOne(query2, {note_id: note_id1});
+
+    res.json({ result: 'ok' });
+    console.log('[PUT /note/swap] end---------------------------------');
+  }
+  putSwap();
+}); 
+
 module.exports = router;

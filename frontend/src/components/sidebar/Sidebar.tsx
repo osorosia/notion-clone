@@ -5,6 +5,8 @@ import { defaultNote, Note } from '../Home';
 import Search from './search/Search';
 import { useNavigate } from 'react-router-dom';
 import '../../style/Sidebar.scss';
+import { Container, Draggable, DropResult } from 'react-smooth-dnd';
+import { arrayMoveImmutable } from 'array-move';
 
 const Sidebar = (props: any) => {
   const {
@@ -80,6 +82,29 @@ const Sidebar = (props: any) => {
     fetchDelete();
   }
 
+  const onDrop = (dropResult: DropResult) => {
+    const {removedIndex, addedIndex} = dropResult;
+    if (removedIndex === null || addedIndex === null)
+      return;
+    let nextNotes : Note[] = arrayMoveImmutable(notes, removedIndex || 0, addedIndex || 0);
+    [nextNotes[removedIndex].note_id, nextNotes[addedIndex].note_id] = [nextNotes[addedIndex].note_id, nextNotes[removedIndex].note_id];
+
+    setNotes(nextNotes);
+
+    const id1 = notes[removedIndex]._id;
+    const id2 = notes[addedIndex]._id;
+
+    // DBを更新
+    const fetchUpdate = async () => {
+      const url = `http://localhost:8080/api/note/swap?_id1=${id1}&_id2=${id2}`;
+      const res = await axios.put(url);
+      const json = res.data;
+      
+      console.log('DB', json.result);
+    };
+    fetchUpdate();    
+  };
+
   return (
     <div className='sidebar'
       style={{display: visibleSidebar? '' : 'none'}}
@@ -125,15 +150,23 @@ const Sidebar = (props: any) => {
 
         {/* ノート一覧 */}
         <div className='sidebar-main-notes'>
-          {notes.map((note: any, i: number) => (
-            <NoteItem
-              key={i}
-              note={note}
-              nowNoteId={nowNoteId}
-              setNowNoteId={setNowNoteId}
-              deleteNote={deleteNote}
-            />
-          ))}
+          <Container
+            dragHandleSelector='.sidebar-main-notes-item'
+            lockAxis='y'
+            onDrop={onDrop}
+          >
+            {notes.map((note: any, i: number) => (
+              <Draggable key={i}>
+                <NoteItem
+                  key={i}
+                  note={note}
+                  nowNoteId={nowNoteId}
+                  setNowNoteId={setNowNoteId}
+                  deleteNote={deleteNote}
+                />
+              </Draggable>
+            ))}
+          </Container>
         </div>
 
         {/* ノート新規作成 */}
