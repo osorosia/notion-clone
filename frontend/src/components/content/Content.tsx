@@ -4,7 +4,7 @@ import Title from './main/Title';
 import Body from './main/Body';
 import { Note, defaultNote } from '../Home';
 import axios from 'axios';
-import './Content.scss';
+import '../../style/Content.scss';
 
 const Content = (props: any) => {
   const {
