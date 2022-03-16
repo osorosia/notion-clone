@@ -1,6 +1,7 @@
 import React from 'react';
 import { Menu, MenuItem, SubMenu, MenuButton } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
+import axios from 'axios';
 
 const LinkCopyButton = () => {
   return (
@@ -34,14 +35,45 @@ const NoteMenuButton = () => {
   );
 }
 
-const NoteMenu = () => {
+const NoteMenu = (props: any) => {
+  const {
+    nowNoteId,
+    setNowNoteId,
+
+    notes,
+    setNotes,
+  } = props;
+
+  const handleLinkCopy = () => {
+    console.log(window.location.href);
+    navigator.clipboard.writeText(window.location.href);
+  };
+
+  const handleDeleteNote = () => {
+    const _id = nowNoteId;
+    let nextNotes = notes?.slice().filter((note: any) => {
+      return _id !== note._id;
+    });
+    setNotes(nextNotes);
+    setNowNoteId('');
+
+    const fetchDelete = async () => {
+      const url = `http://localhost:8080/api/note/delete?_id=${_id}`;
+      const res = await axios.delete(url);
+      const json = res.data;
+
+      console.log('DB', json.result);
+    };
+    fetchDelete();
+  }
+
   return (
     <div>
       <Menu
         menuButton={<MenuButton><NoteMenuButton /></MenuButton>}
       >
-        <MenuItem><LinkCopyButton /></MenuItem>
-        <MenuItem><DeleteNoteButton /></MenuItem>
+        <MenuItem onClick={handleLinkCopy}><LinkCopyButton /></MenuItem>
+        <MenuItem onClick={handleDeleteNote}><DeleteNoteButton /></MenuItem>
       </Menu>
     </div>
   );

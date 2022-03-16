@@ -92,6 +92,8 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    if (nowNoteId === '' && notes && notes.length > 0 && notes[0]._id)
+      setNowNoteId(notes[0]._id);
     navigate('/' + nowNoteId);
   }, [nowNoteId]);
 

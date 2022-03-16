@@ -4,8 +4,15 @@ import SidebarSwitchButton from './SidebarSwitchButton';
 
 const Header = (props: any) => {
   const {
+    notes,
+    setNotes,
+
     nowNoteTitle,
     setNowNoteTitle,
+
+    nowNoteId,
+    setNowNoteId,
+
     visibleSidebar,
     setVisibleSidebar,
   } = props;
@@ -30,7 +37,13 @@ const Header = (props: any) => {
       {/* 右側 */}
       <div className='content-header-right'>
         {/* メニューボタン */}
-        <NoteMenu />
+        <NoteMenu
+          notes={notes}
+          setNotes={setNotes}
+
+          nowNoteId={nowNoteId}
+          setNowNoteId={setNowNoteId}
+        />
       </div>
     </div>
   );

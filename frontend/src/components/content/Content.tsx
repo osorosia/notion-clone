@@ -54,8 +54,14 @@ const Content = (props: any) => {
       {console.log('[Content]', 'rendering')}
       {/* ヘッダー */}
       <Header
+        notes={notes}
+        setNotes={setNotes}
+
         nowNoteTitle={nowNoteTitle}
         setNowNoteTitle={setNowNoteTitle}
+
+        nowNoteId={nowNoteId}
+        setNowNoteId={setNowNoteId}
 
         visibleSidebar={visibleSidebar}
         setVisibleSidebar={setVisibleSidebar}
