@@ -4,7 +4,7 @@ import axios from 'axios';
 import { defaultNote, Note } from '../Home';
 import Search from './search/Search';
 import { useNavigate } from 'react-router-dom';
-import './Sidebar.scss';
+import '../../style/Sidebar.scss';
 
 const Sidebar = (props: any) => {
   const {

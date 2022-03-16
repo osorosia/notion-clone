@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Note } from '../../Home';
-import './Search.scss';
+import '../../../style/Search.scss';
 
 const ResultNoteItem = (props: any) => {
   const {

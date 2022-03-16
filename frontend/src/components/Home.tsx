@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from './sidebar/Sidebar';
 import Content from './content/Content';
-import './Home.scss';
+import '../style/Home.scss';
 import { useNavigate } from 'react-router-dom';
 
 type Line = {
