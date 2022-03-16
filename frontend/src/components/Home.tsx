@@ -7,18 +7,39 @@ import { useNavigate } from 'react-router-dom';
 
 type Line = {
   text: string;
+  style: string;
+  font: {
+    bold: boolean;
+    underline: boolean;
+    border: boolean;
+    itaric: boolean;
+    strike: boolean;
+  };
+};
+
+const defaultLine: Line = {
+  text: '',
+  style: '',
+  font: {
+    bold: false,
+    underline: false,
+    border: false,
+    itaric: false,
+    strike: false,
+  },
 };
 
 export type Note = {
   _id?: string;
+  note_id: number;
   title: string;
   body: Array<Line>;
 };
 
 export const defaultNote: Note = {
-  _id: '',
+  note_id: -1,
   title: '',
-  body: [{text: ''}],
+  body: [defaultLine],
 };
 
 type Action = {
@@ -46,20 +67,20 @@ const Home = () => {
   
   // ノート一覧を取得
   useEffect(() => {
-    console.log('useEffect:', 'ノート一覧を取得:', 'call >>');
-
     const fetchGet = async () => {
       const url = "http://localhost:8080/api/note";
       const res = await axios.get(url);
       const json = res.data;
 
+      console.log('DB', json.result);
       if (json.result === 'ng')
         return;
-      console.log('useEffect:', 'ノート一覧を取得:', 'json', json);
 
-      setNotes(json.notes);
+      const nextNotes = json.notes.slice().sort((note1: Note, note2: Note) => {
+        return note1.note_id > note2.note_id;
+      });
       
-      console.log('useEffect:', 'ノート一覧を取得:', '<< success');
+      setNotes(nextNotes);
     }
     fetchGet();
   }, []);

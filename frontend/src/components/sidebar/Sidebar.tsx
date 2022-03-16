@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import NoteItem from './note/NoteItem';
 import axios from 'axios';
-import { Note } from '../Home';
+import { defaultNote, Note } from '../Home';
 import Search from './search/Search';
 import { useNavigate } from 'react-router-dom';
 import './Sidebar.scss';
@@ -23,10 +23,7 @@ const Sidebar = (props: any) => {
     console.log('createNote():', 'call >>');
 
     const fetchPost = async () => {
-      let newNote: Note = {
-        title: '',
-        body: [{text: ''}],
-      };
+      let newNote: Note = defaultNote;
       
       // DBに新規ノートをpost
       const url = 'http://localhost:8080/api/note/new';
