@@ -1,4 +1,6 @@
+import { arrayMoveImmutable, arrayMoveMutable } from 'array-move';
 import React, { useEffect, useRef, useState } from 'react';
+import { Container, Draggable, DropResult } from 'react-smooth-dnd';
 import Line from './body/Line';
 
 const Body = (props: any) => {
@@ -24,21 +26,35 @@ const Body = (props: any) => {
 
   }, [focusLineIndex]);
 
+  const onDrop = (dropResult: DropResult) => {
+    const {removedIndex, addedIndex } = dropResult;
+    let newBody = arrayMoveImmutable(nowNote.body, removedIndex || 0, addedIndex || 0);
+    setNowNote({...nowNote, body: newBody});
+  }
+
   return (
     <div className='content-main-body'>
-      {nowNote.body.map((line: any, i: number) => (
-        <Line
-          key={i}
-          index={i}
-          line={line}
-
-          nowNote={nowNote}
-          setNowNote={setNowNote}
-          
-          refs={refs}
-          setFocusLineIndex={setFocusLineIndex}
-        />
-      ))}
+      <Container
+        dragHandleSelector='.content-main-body-line-move-button'
+        lockAxis='y'
+        onDrop={onDrop}
+      >
+        {nowNote.body.map((line: any, i: number) => (
+          <Draggable key={i}>
+            <Line
+              key={i}
+              index={i}
+              line={line}
+              
+              nowNote={nowNote}
+              setNowNote={setNowNote}
+              
+              refs={refs}
+              setFocusLineIndex={setFocusLineIndex}
+            />
+          </Draggable>
+        ))}
+      </Container>
     </div>
   );
 };
