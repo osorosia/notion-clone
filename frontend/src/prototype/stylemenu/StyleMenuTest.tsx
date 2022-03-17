@@ -3,12 +3,12 @@ import './style.scss';
 
 const StyleMenuTest = () => {
   return (
-    <div className='style-menu'>
-      <div className='style-menu-left' />
-      <div className='style-menu-center'>
-        <div className='style-menu-box'>
-          <div className='style-menu-box-item'>
-            <div className='style-menu-box-item-icon'>
+    <div className='proto-style-menu'>
+      <div className='proto-style-menu-left' />
+      <div className='proto-style-menu-center'>
+        <div className='proto-style-menu-box'>
+          <div className='proto-style-menu-box-item'>
+            <div className='proto-style-menu-box-item-icon'>
               <img src="https://www.notion.so/images/blocks/text.9fdb530b.png" />
             </div>
             テキスト
@@ -17,39 +17,39 @@ const StyleMenuTest = () => {
             </svg> */}
           </div>
 
-          <div className='style-menu-box-item'>
-            <div className='style-menu-box-item-icon'>
+          <div className='proto-style-menu-box-item'>
+            <div className='proto-style-menu-box-item-icon'>
               <img src="https://www.notion.so/images/blocks/header.57a7576a.png" />
             </div>
             見出し1
           </div>
 
-          <div className='style-menu-box-item'>
-            <div className='style-menu-box-item-icon'>
+          <div className='proto-style-menu-box-item'>
+            <div className='proto-style-menu-box-item-icon'>
               <img src="https://www.notion.so/images/blocks/subheader.9aab4769.png" />
             </div>
             見出し2
           </div>
 
-          <div className='style-menu-box-item'>
-            <div className='style-menu-box-item-icon'>
+          <div className='proto-style-menu-box-item'>
+            <div className='proto-style-menu-box-item-icon'>
               <img src="https://www.notion.so/images/blocks/subsubheader.d0ed0bb3.png" />
             </div>
             見出し3
           </div>
 
-          <div className='style-menu-box-item'>
-            <div className='style-menu-box-item-icon'>
+          <div className='proto-style-menu-box-item'>
+            <div className='proto-style-menu-box-item-icon'>
               <img src="https://www.notion.so/images/blocks/code.a8b201f4.png" />
             </div>
             コード
           </div>
           
-          <div className='style-menu-box-fontbox'>
-            <div className='style-menu-box-fontbox-item bold'>B</div>
-            <div className='style-menu-box-fontbox-item italic'>i</div>
-            <div className='style-menu-box-fontbox-item underline'>U</div>
-            <div className='style-menu-box-fontbox-item strike'>S</div>
+          <div className='proto-style-menu-box-fontbox'>
+            <div className='proto-style-menu-box-fontbox-item bold'>B</div>
+            <div className='proto-style-menu-box-fontbox-item italic'>i</div>
+            <div className='proto-style-menu-box-fontbox-item underline'>U</div>
+            <div className='proto-style-menu-box-fontbox-item strike'>S</div>
           </div>
 
         </div>
