@@ -1,6 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import axios from 'axios';
 import './style.scss';
+import StyleMenu from './StyleMenu';
 
 const Line = (props: any) => {
   const {
@@ -16,6 +17,13 @@ const Line = (props: any) => {
   const { text } = line;
 
   const [visibleButton, setVisibleButton] = useState<boolean>(false);
+  const [showStyleMenu, setShowStyleMenu] = useState<boolean>(false);
+
+  const ref = useRef(null);
+
+  const switchStyleMenu = () => {
+    setShowStyleMenu(!showStyleMenu);
+  }
 
   // テキストを入力したとき
   const handleInput = (e: any) => {
@@ -113,6 +121,17 @@ const Line = (props: any) => {
     }
   }
 
+  const getCurrentPosition = (elem: any) => {
+		const { top, left } = elem.getBoundingClientRect();
+		return { top, left };
+	};
+
+  const handleClickStyle = () => {
+    // const a = getCurrentPosition(ref.current);
+    // console.log(a);
+    switchStyleMenu();
+  };
+
   const stylize = () => {
     return line.style + ' ' + line.font.join(' ');
   }
@@ -125,11 +144,8 @@ const Line = (props: any) => {
     >
       {console.log('[Line]', 'rendering')}
       {/* 左 */}
-      <div className='content-main-body-line-left'>
+      <div className='content-main-body-line-left' ref={ref}>
 
-        {/* スタイルボタン */}
-        {/* TODO */}
-        
         {/* 追加ボタン */}
         <div
           className='content-main-body-line-add-button'
@@ -154,13 +170,27 @@ const Line = (props: any) => {
           </div>
         </div>
 
-        <div className='content-main-body-line-style-button'
+        {/* スタイルボタン */}
+        <div
+          className='content-main-body-line-style-button'
           style={{display: visibleButton ? '' : 'none'}}
+          onClick={() => handleClickStyle()}
         >
           <div className='content-main-body-line-style-button-icon'>
             A
           </div>
         </div>
+        {showStyleMenu ? 
+          <StyleMenu
+            nowNote={nowNote}
+            setNowNote={setNowNote}
+            index={index}
+            showStyleMenu={showStyleMenu}
+            switchStyleMenu={switchStyleMenu}
+            pos={getCurrentPosition(ref.current)}
+          /> 
+          : <div />
+        }
 
       </div>
 
