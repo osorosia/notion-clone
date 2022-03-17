@@ -8,14 +8,8 @@ const NoteSchema = mongoose.Schema({
         {
             text: {type: String, default: ''},
             style: {type: String, default: ''},
-            font: {
-                bold: {type: Boolean, default: false},
-                underline: {type: Boolean, default: false},
-                border: {type: Boolean, default: false},
-                itaric: {type: Boolean, default: false},
-                strike: {type: Boolean, default: false},
-            },
-        }
+            font: {type: [String], default: []},
+        },
     ],
 });
 

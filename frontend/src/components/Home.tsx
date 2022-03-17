@@ -8,32 +8,20 @@ import { useNavigate } from 'react-router-dom';
 type Line = {
   text: string;
   style: string;
-  font: {
-    bold: boolean;
-    underline: boolean;
-    border: boolean;
-    itaric: boolean;
-    strike: boolean;
-  };
+  font: string[];
 };
 
 const defaultLine: Line = {
   text: '',
   style: '',
-  font: {
-    bold: false,
-    underline: false,
-    border: false,
-    itaric: false,
-    strike: false,
-  },
+  font: [],
 };
 
 export type Note = {
   _id?: string;
   note_id: number;
   title: string;
-  body: Array<Line>;
+  body: Line[];
 };
 
 export const defaultNote: Note = {
