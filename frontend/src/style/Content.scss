@@ -132,6 +132,7 @@
         &-style-button {
           display: flex;
           align-items: center;
+          user-select: none;
           padding: 0px 2px;
           &:hover {
             background: rgba(55, 53, 47, 0.08);
