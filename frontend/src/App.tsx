@@ -12,6 +12,7 @@ import DesignTest from './prototype/design/Design';
 import FocusTest from './prototype/focus/FocusTest';
 import ModalTest from './prototype/modal/ModalTest';
 import MenuTest from './prototype/menu/MenuTest';
+import StyleMenuTest from './prototype/stylemenu/StyleMenuTest';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path='/focus' element={<FocusTest />} />
           <Route path='/modal' element={<ModalTest />} />
           <Route path='/menu' element={<MenuTest />} />
+          <Route path='/stylemenu' element={<StyleMenuTest />} />
           {/* ▲ sample */}
           <Route path='/*' element={<Home />} />
         </Routes>
