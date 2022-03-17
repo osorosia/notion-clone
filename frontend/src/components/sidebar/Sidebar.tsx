@@ -37,6 +37,7 @@ const Sidebar = (props: any) => {
       if (json.result === 'ng')
         return;
       newNote._id = json._id;
+      newNote.note_id = json.note_id;
 
       // 成功したらノート一覧を更新
       const nextNotes = notes.slice();

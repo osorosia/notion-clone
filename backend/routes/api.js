@@ -26,7 +26,9 @@ router.get('/note', function(req, res, next) {
 router.post('/note/new', function(req, res, next) {
   console.log('[POST /note/new] start---------------------------------');
   //  req.bodyからNoteモデル作成
-  const note = new Note(req.body);
+  const json = req.body;
+  const newNote = {title: json.title, body: json.body};
+  const note = new Note(newNote);
   console.log(note);
 
   // DBに保存
@@ -34,7 +36,8 @@ router.post('/note/new', function(req, res, next) {
     if (err) res.json( {result: 'ng'} );
     else {
       console.log('[POST /note/new] end---------------------------------');
-      res.json({ result: 'ok', _id: note._id });
+      res.json({ result: 'ok', _id: note._id, note_id: note.note_id });
+      return note.save();
     }
   });
 });
