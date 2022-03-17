@@ -113,6 +113,10 @@ const Line = (props: any) => {
     }
   }
 
+  const stylize = () => {
+    return line.style + ' ' + line.font.join(' ');
+  }
+
   return (
     <div
       className='content-main-body-line'
@@ -154,7 +158,7 @@ const Line = (props: any) => {
 
       {/* 中央 */}
       <div className='content-main-body-line-center'>
-        <div className='tes'>
+        <div className={stylize()}>
           <div
             className='content-main-body-line-text-editor'
             ref={el => refs.current[index] = el}

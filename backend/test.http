@@ -50,13 +50,57 @@ content-type: application/json
     "body": [
         {
             "text": "new_text1",
-            "font": ["itaric"]
         },
         {
             "text": "new_text2"
         },
         {
             "text": "new_text3"
+        }
+    ]
+}
+
+###
+POST http://localhost:8080/api/note/new
+content-type: application/json
+
+{
+    "title": "font-test",
+    "body": [
+        {
+            "text": "normal"
+        },
+        {
+            "text": "h1",
+            "style": "h1"
+        },
+        {
+            "text": "h2",
+            "style": "h2"
+        },
+        {
+            "text": "h3",
+            "style": "h3"
+        },
+        {
+            "text": "code",
+            "style": "code"
+        },
+        {
+            "text": "bold",
+            "font": ["bold"]
+        },
+        {
+            "text": "underline",
+            "font": ["underline"]
+        },
+        {
+            "text": "italic",
+            "font": ["italic"]
+        },
+        {
+            "text": "strike",
+            "font": ["strike"]
         }
     ]
 }
