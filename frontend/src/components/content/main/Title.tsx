@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from '../../../axios';
 
 const Title = (props: any) => {
   const {
@@ -30,7 +30,7 @@ const Title = (props: any) => {
     
     // DBに送信
     const fetchPost = async () => {
-      const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
+      const url = `/api/note/update?_id=${nowNote._id}`;
       const params = { title: nextTitle };
       const res = await axios.put(url, params);
       const json = res.data;

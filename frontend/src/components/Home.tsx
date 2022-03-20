@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../axios';
 import Sidebar from './sidebar/Sidebar';
 import Content from './content/Content';
 import '../style/Home.scss';
@@ -56,7 +56,7 @@ const Home = () => {
   // ノート一覧を取得
   useEffect(() => {
     const fetchGet = async () => {
-      const url = "http://localhost:8080/api/note";
+      const url = "/api/note";
       const res = await axios.get(url);
       const json = res.data;
 

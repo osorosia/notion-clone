@@ -3,7 +3,7 @@ import Header from './header/Header';
 import Title from './main/Title';
 import Body from './main/Body';
 import { Note, defaultNote } from '../Home';
-import axios from 'axios';
+import axios from '../../axios';
 import '../../style/Content.scss';
 
 const Content = (props: any) => {
@@ -29,7 +29,7 @@ const Content = (props: any) => {
     console.log('useEffect:', '現在IDのノートを取得:', 'call >>');
     // console.log('useEffect:', '現在IDのノートを取得:', 'nowNoteId =', nowNoteId);
     const fetchGet = async () => {
-      const url = `http://localhost:8080/api/note?_id=${nowNoteId}`;
+      const url = `/api/note?_id=${nowNoteId}`;
       const res = await axios.get(url);
       const json = res.data;
 

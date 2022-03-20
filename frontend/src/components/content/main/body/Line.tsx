@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
-import axios from 'axios';
+import axios from '../../../../axios';
 import './style.scss';
 import StyleMenu from './StyleMenu';
 
@@ -32,7 +32,7 @@ const Line = (props: any) => {
       console.log(userInput);
       nowNote.body[index].text = userInput;
 
-      const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
+      const url = `/api/note/update?_id=${nowNote._id}`;
       const params = { body: nowNote.body };
       const res = await axios.put(url, params);
       const json = res.data;
@@ -54,7 +54,7 @@ const Line = (props: any) => {
       // 追加した行にフォーカス
       setFocusLineIndex(index + 1);
       
-      const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
+      const url = `/api/note/update?_id=${nowNote._id}`;
       const params = { body: newBody };
       const res = await axios.put(url, params);
       const json = res.data;
@@ -107,7 +107,7 @@ const Line = (props: any) => {
         setFocusLineIndex(index);
 
       const fetchUpdate = async () => {
-        const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
+        const url = `/api/note/update?_id=${nowNote._id}`;
         const params = { body: newBody };
         const res = await axios.put(url, params);
         const json = res.data;

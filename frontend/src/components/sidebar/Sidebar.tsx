@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NoteItem from './note/NoteItem';
-import axios from 'axios';
+import axios from '../../axios';
 import { defaultNote, Note } from '../Home';
 import Search from './search/Search';
 import { useNavigate } from 'react-router-dom';
@@ -28,7 +28,7 @@ const Sidebar = (props: any) => {
       let newNote: Note = defaultNote;
       
       // DBに新規ノートをpost
-      const url = 'http://localhost:8080/api/note/new';
+      const url = '/api/note/new';
       const params = newNote;
       const res = await axios.post(url, params);
       const json = res.data;
@@ -60,7 +60,7 @@ const Sidebar = (props: any) => {
       // 削除するノートID
       console.log('deleteNote(): _id =', _id);
       // DBから削除
-      const url = `http://localhost:8080/api/note/delete?_id=${_id}`;
+      const url = `/api/note/delete?_id=${_id}`;
       const res = await axios.delete(url);
       const json = res.data;
 
@@ -97,7 +97,7 @@ const Sidebar = (props: any) => {
 
     // DBを更新
     const fetchUpdate = async () => {
-      const url = `http://localhost:8080/api/note/swap?_id1=${id1}&_id2=${id2}`;
+      const url = `/api/note/swap?_id1=${id1}&_id2=${id2}`;
       const res = await axios.put(url);
       const json = res.data;
       

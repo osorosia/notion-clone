@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../../../axios';
 import React, { useEffect, useState } from 'react';
 import '../../../../style/StyleMenu.scss'
 
@@ -29,7 +29,7 @@ const StyleMenu = (props: any) => {
     setNowNote({...nowNote, body: newBody});
 
     const fetchUpdate = async () => {
-      const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
+      const url = `/api/note/update?_id=${nowNote._id}`;
       const params = { body: newBody };
       const res = await axios.put(url, params);
       const json = res.data;
@@ -50,7 +50,7 @@ const StyleMenu = (props: any) => {
     setNowNote({...nowNote, body: newBody});
 
     const fetchUpdate = async () => {
-      const url = `http://localhost:8080/api/note/update?_id=${nowNote._id}`;
+      const url = `/api/note/update?_id=${nowNote._id}`;
       const params = { body: newBody };
       const res = await axios.put(url, params);
       const json = res.data;
