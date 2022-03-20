@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import '../../style/Sidebar.scss';
 import { Container, Draggable, DropResult } from 'react-smooth-dnd';
 import { arrayMoveImmutable } from 'array-move';
+import { fetchDeleteNote, fetchPostNote, fetchPutNote, fetchSwapNotes } from '../../fetch';
 
 const Sidebar = (props: any) => {
   const {
@@ -22,20 +23,14 @@ const Sidebar = (props: any) => {
 
   // ノートを新規作成
   const createNote = () => {
-    console.log('createNote():', 'call >>');
-
     const fetchPost = async () => {
-      let newNote: Note = defaultNote;
+      let newNote: any = {title: '', body: [{text: '', style: '', font: []}]};
       
       // DBに新規ノートをpost
-      const url = '/api/note/new';
-      const params = newNote;
-      const res = await axios.post(url, params);
-      const json = res.data;
-      
-      console.log('createNote():', 'json', json);
+      const json = await fetchPostNote(newNote);
       if (json.result === 'ng')
         return;
+
       newNote._id = json._id;
       newNote.note_id = json.note_id;
 
@@ -46,41 +41,23 @@ const Sidebar = (props: any) => {
 
       // 現在のノートIDを更新
       setNowNoteId(json._id);
-
-      console.log('createNote():', '<< success');
     }
     fetchPost();
   }
 
   // ノートを削除
   const deleteNote = (_id: string) => {
-    console.log('deleteNote():', 'call');
+    // ノート一覧を更新
+    let nextNotes = notes?.slice().filter((note: any) => {
+      return _id !== note._id;
+    });
+    setNotes(nextNotes);
 
-    const fetchDelete = async () => {
-      // 削除するノートID
-      console.log('deleteNote(): _id =', _id);
-      // DBから削除
-      const url = `/api/note/delete?_id=${_id}`;
-      const res = await axios.delete(url);
-      const json = res.data;
+    // 削除されたIDが現在のIDなら、一番上のノートを開く
+    if (_id === nowNoteId)
+      setNowNoteId(notes.length ? notes[0]._id : '');
 
-      console.log('deleteNote():', 'json', json);
-      if (json.result === 'ng')
-        return;
-      
-      // 削除できたらノート一覧を更新
-      let nextNotes = notes?.slice().filter((note: any) => {
-        return _id !== note._id;
-      });
-      setNotes(nextNotes);
-
-      // 削除されたIDが現在のIDなら、一番上のノートを開く
-      if (_id === nowNoteId)
-        setNowNoteId(notes.length ? notes[0]._id : '');
-      
-      console.log('deleteNote():', 'success');
-    }
-    fetchDelete();
+    fetchDeleteNote(_id);
   }
 
   const onDrop = (dropResult: DropResult) => {
@@ -95,15 +72,7 @@ const Sidebar = (props: any) => {
     const id1 = notes[removedIndex]._id;
     const id2 = notes[addedIndex]._id;
 
-    // DBを更新
-    const fetchUpdate = async () => {
-      const url = `/api/note/swap?_id1=${id1}&_id2=${id2}`;
-      const res = await axios.put(url);
-      const json = res.data;
-      
-      console.log('DB', json.result);
-    };
-    fetchUpdate();    
+    fetchSwapNotes(id1, id2);
   };
 
   return (

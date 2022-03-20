@@ -1,5 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import axios from '../../../../axios';
+import { fetchPutNote } from '../../../../fetch';
 import './style.scss';
 import StyleMenu from './StyleMenu';
 
@@ -27,43 +28,23 @@ const Line = (props: any) => {
 
   // テキストを入力したとき
   const handleInput = (e: any) => {
-    const fetchUpdate = async () => {
-      const userInput = e.target.innerHTML;
-      console.log(userInput);
-      nowNote.body[index].text = userInput;
+    const userInput = e.target.innerHTML;
+    console.log(userInput);
+    nowNote.body[index].text = userInput;
 
-      const url = `/api/note/update?_id=${nowNote._id}`;
-      const params = { body: nowNote.body };
-      const res = await axios.put(url, params);
-      const json = res.data;
-
-      console.log('DB', json.result)
-      if (json.result === 'ng')
-        return;
-    };
-    fetchUpdate();
+    fetchPutNote(nowNote._id, { body: nowNote.body });
   };
 
   const addNewLine = () => {
-    const fetchUpdate = async () => {
-      // 現在のノートを更新
-      let newBody = nowNote.body.slice();
-      newBody.splice(index + 1, 0, {text: '', style: '', font: []});
-      setNowNote({...nowNote, body: newBody});
+    // 現在のノートを更新
+    let newBody = nowNote.body.slice();
+    newBody.splice(index + 1, 0, {text: '', style: '', font: []});
+    setNowNote({...nowNote, body: newBody});
 
-      // 追加した行にフォーカス
-      setFocusLineIndex(index + 1);
-      
-      const url = `/api/note/update?_id=${nowNote._id}`;
-      const params = { body: newBody };
-      const res = await axios.put(url, params);
-      const json = res.data;
-
-      console.log(json.result);
-      if (json.result === 'ng')
-        return;
-    };
-    fetchUpdate();
+    // 追加した行にフォーカス
+    setFocusLineIndex(index + 1);
+    
+    fetchPutNote(nowNote._id, { body: newBody });
   }
 
   const handleKeyPress = (e: any) => {
@@ -106,17 +87,8 @@ const Line = (props: any) => {
       if (e.key === 'Delete')
         setFocusLineIndex(index);
 
-      const fetchUpdate = async () => {
-        const url = `/api/note/update?_id=${nowNote._id}`;
-        const params = { body: newBody };
-        const res = await axios.put(url, params);
-        const json = res.data;
+      fetchPutNote(nowNote._id, { body: newBody });
 
-        console.log('DB', json.result);
-        if (json.result === 'ng')
-          return;
-      };
-      fetchUpdate();
       return e.preventDefault();
     }
   }

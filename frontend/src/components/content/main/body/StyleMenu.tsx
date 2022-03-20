@@ -1,6 +1,7 @@
 import axios from '../../../../axios';
 import React, { useEffect, useState } from 'react';
 import '../../../../style/StyleMenu.scss'
+import { fetchPutNote } from '../../../../fetch';
 
 const StyleMenu = (props: any) => {
   const {
@@ -28,15 +29,7 @@ const StyleMenu = (props: any) => {
       newBody[index].style = style;
     setNowNote({...nowNote, body: newBody});
 
-    const fetchUpdate = async () => {
-      const url = `/api/note/update?_id=${nowNote._id}`;
-      const params = { body: newBody };
-      const res = await axios.put(url, params);
-      const json = res.data;
-
-      console.log('DB', json.result);
-    }
-    fetchUpdate();
+    fetchPutNote(nowNote._id, { body: newBody });
   }
   
   const setFont = (font: string) => {
@@ -49,15 +42,7 @@ const StyleMenu = (props: any) => {
       newBody[index].font.push(font);
     setNowNote({...nowNote, body: newBody});
 
-    const fetchUpdate = async () => {
-      const url = `/api/note/update?_id=${nowNote._id}`;
-      const params = { body: newBody };
-      const res = await axios.put(url, params);
-      const json = res.data;
-
-      console.log('DB', json.result);
-    }
-    fetchUpdate();
+    fetchPutNote(nowNote._id, { body: newBody });
   }
 
   const style = {

@@ -3,7 +3,7 @@ import Header from './header/Header';
 import Title from './main/Title';
 import Body from './main/Body';
 import { Note, defaultNote } from '../Home';
-import axios from '../../axios';
+import { fetchGetNote } from '../../fetch';
 import '../../style/Content.scss';
 
 const Content = (props: any) => {
@@ -26,24 +26,15 @@ const Content = (props: any) => {
 
   // 現在のノートをDBにから取得
   useEffect(() => {
-    console.log('useEffect:', '現在IDのノートを取得:', 'call >>');
-    // console.log('useEffect:', '現在IDのノートを取得:', 'nowNoteId =', nowNoteId);
     const fetchGet = async () => {
-      const url = `/api/note?_id=${nowNoteId}`;
-      const res = await axios.get(url);
-      const json = res.data;
-
+      const json = await fetchGetNote(nowNoteId);
       if (json.result === 'ng')
         return;
-      if (json.notes.length !== 1)
-        return;
-      console.log('useEffect:', '現在IDのノートを取得:', 'json', json);
 
       // 取得したノートをセット
       const newNote = json.notes[0];
       setNowNote(newNote);
       setNowNoteTitle(newNote.title);
-      console.log('useEffect:', '現在IDのノートを取得:', '<< success');
     }
     fetchGet();
   }, [nowNoteId]);

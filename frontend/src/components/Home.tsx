@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../axios';
+import { fetchGetNotes } from '../fetch';
 import Sidebar from './sidebar/Sidebar';
 import Content from './content/Content';
 import '../style/Home.scss';
@@ -44,6 +45,18 @@ const getUrlId = (): string => {
   return id;
 };
 
+const getSortedNotes = (notes: Note[]) => {
+  const sortedNotes = notes.slice().sort((note1: Note, note2: Note) => {
+    if (note1.note_id < note2.note_id)
+      return -1;
+    else if (note1.note_id > note2.note_id)
+      return 1;
+    else
+      return 0;
+  });
+  return sortedNotes;
+};
+
 const Home = () => {
   const navigate = useNavigate();
   // 現在のid
@@ -56,29 +69,18 @@ const Home = () => {
   // ノート一覧を取得
   useEffect(() => {
     const fetchGet = async () => {
-      const url = "/api/note";
-      const res = await axios.get(url);
-      const json = res.data;
-
-      console.log('DB', json.result);
+      const json = await fetchGetNotes();
       if (json.result === 'ng')
         return;
 
-      const nextNotes = json.notes.slice().sort((note1: Note, note2: Note) => {
-        if (note1.note_id < note2.note_id)
-          return -1;
-        else if (note1.note_id > note2.note_id)
-          return 1;
-        else
-          return 0;
-      });
+      const sortedNotes = getSortedNotes(json.notes);
 
-      console.log('nextNotes', nextNotes);
-      setNotes(nextNotes);
+      setNotes(sortedNotes);
     }
     fetchGet();
   }, []);
 
+  // URLが'/'のとき、先頭のノートを取得する
   useEffect(() => {
     if (nowNoteId === '' && notes && notes.length > 0 && notes[0]._id)
       setNowNoteId(notes[0]._id);
@@ -92,7 +94,6 @@ const Home = () => {
 
   return (
     <div className='Home'>
-      {console.log('[Home]', 'rendering')}
       {/* サイドバー */}
       <Sidebar
         notes={notes}

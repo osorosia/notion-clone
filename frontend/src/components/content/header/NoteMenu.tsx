@@ -2,6 +2,7 @@ import React from 'react';
 import { Menu, MenuItem, SubMenu, MenuButton } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
 import axios from '../../../axios';
+import { fetchDeleteNote } from '../../../fetch';
 
 const LinkCopyButton = () => {
   return (
@@ -57,14 +58,7 @@ const NoteMenu = (props: any) => {
     setNotes(nextNotes);
     setNowNoteId('');
 
-    const fetchDelete = async () => {
-      const url = `/api/note/delete?_id=${_id}`;
-      const res = await axios.delete(url);
-      const json = res.data;
-
-      console.log('DB', json.result);
-    };
-    fetchDelete();
+    fetchDeleteNote(_id);
   }
 
   return (

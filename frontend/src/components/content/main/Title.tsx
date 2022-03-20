@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from '../../../axios';
+import { fetchPutNote } from '../../../fetch';
 
 const Title = (props: any) => {
   const {
@@ -28,17 +29,7 @@ const Title = (props: any) => {
       nextNote.title = nextTitle;
     setNotes(nextNotes);
     
-    // DBに送信
-    const fetchPost = async () => {
-      const url = `/api/note/update?_id=${nowNote._id}`;
-      const params = { title: nextTitle };
-      const res = await axios.put(url, params);
-      const json = res.data;
-
-      if (json.result === 'ng')
-        console.log('POST error');
-    };
-    fetchPost();
+    fetchPutNote(nowNote._id, { title: nextTitle });
   };
 
   // タイトルフォーカス時のキー入力を制御
