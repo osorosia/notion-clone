@@ -46,7 +46,6 @@ const NoteMenu = (props: any) => {
   } = props;
 
   const handleLinkCopy = () => {
-    console.log(window.location.href);
     navigator.clipboard.writeText(window.location.href);
   };
 

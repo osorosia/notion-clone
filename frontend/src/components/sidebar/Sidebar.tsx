@@ -79,7 +79,6 @@ const Sidebar = (props: any) => {
     <div className='sidebar'
       style={{display: visibleSidebar? '' : 'none'}}
     >
-      {console.log('[Sidebar]', 'rendering')}
       {/* ヘッダー */}
       <div className='sidebar-header'>
         {/* left */}

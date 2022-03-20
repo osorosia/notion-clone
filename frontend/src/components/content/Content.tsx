@@ -42,7 +42,6 @@ const Content = (props: any) => {
 
   return (
     <div className='content'>
-      {console.log('[Content]', 'rendering')}
       {/* ヘッダー */}
       <Header
         notes={notes}

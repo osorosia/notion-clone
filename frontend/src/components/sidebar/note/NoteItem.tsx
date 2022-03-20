@@ -19,7 +19,6 @@ const NoteItem = (props: any) => {
         } : {} 
       }
     >
-      {console.log('[NoteItem]', 'rendering')}
       <div
         className='sidebar-main-notes-item-icon'
         onClick={() => setNowNoteId(note._id)}

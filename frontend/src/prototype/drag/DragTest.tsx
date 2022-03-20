@@ -21,7 +21,6 @@ const DragTest = () => {
     const { removedIndex, addedIndex } = dropResult;
     setItems((itemsArray) => {
       const arr = arrayMoveImmutable(itemsArray, removedIndex || 0, addedIndex || 0);
-      console.log(arr);
       return arr;
     });
   };

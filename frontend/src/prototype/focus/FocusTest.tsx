@@ -55,7 +55,6 @@ const FocusTest = () => {
       >
         add line
       </button>
-      {console.log('rendering -----------------------')}
       {ls.map((text, i) => (
         // <Line
         //   key={i}

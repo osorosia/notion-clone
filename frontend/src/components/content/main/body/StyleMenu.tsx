@@ -17,7 +17,6 @@ const StyleMenu = (props: any) => {
   const [menuPos, setMenuPos] = useState({top: top, left: left});
 
   useEffect(() => {
-    console.log(top, left);
     setMenuPos({top: top, left: left});
   }, [showStyleMenu]);
 

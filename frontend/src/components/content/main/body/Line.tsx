@@ -29,7 +29,6 @@ const Line = (props: any) => {
   // テキストを入力したとき
   const handleInput = (e: any) => {
     const userInput = e.target.innerHTML;
-    console.log(userInput);
     nowNote.body[index].text = userInput;
 
     fetchPutNote(nowNote._id, { body: nowNote.body });
@@ -99,8 +98,6 @@ const Line = (props: any) => {
 	};
 
   const handleClickStyle = () => {
-    // const a = getCurrentPosition(ref.current);
-    // console.log(a);
     switchStyleMenu();
   };
 
@@ -114,7 +111,6 @@ const Line = (props: any) => {
       onMouseOver={() => setVisibleButton(true)}
       onMouseOut={() => setVisibleButton(false)}
     >
-      {console.log('[Line]', 'rendering')}
       {/* 左 */}
       <div className='content-main-body-line-left' ref={ref}>
 
